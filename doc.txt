@@ -1,0 +1,153 @@
+www  WEB部署目录（或者子目录）
+
+├─application           应用目录
+│  ├─common             公共模块目录（可以更改）
+│  ├─admin              =====后台目录=====
+│  │  ├─controller      控制器目录
+│  │  │  ├─agent        分销
+│  │  │  ├─article      文章内容管理
+│  │  │  ├─finance      财务管理
+│  │  │  ├─order        订单管理
+│  │  │  ├─record       数据统计
+│  │  │  ├─routine     小程序后台管理
+│  │  │  ├─server      程序升级服务端管理
+│  │  │  ├─setting     系统设置
+│  │  │  ├─store       商城目录
+│  │  │  ├─system      系统维护
+│  │  │  ├─ump         营销管理
+│  │  │  ├─user        用户目录
+│  │  │  ├─wechat      微信管理目录
+│  │  │  ├─widget      公共调用
+│  │  │  ├─merchant    商户目录
+│  │  │  ├─AuthController.php        后台基类
+│  │  │  ├─Common.php                后台公共方法类
+│  │  │  ├─Login.php                 登录
+│  │  │  ├─Index.php                 后台首页
+│  │  │  └─AuthController.php        后台基类
+│  │  ├─model           模型目录
+│  │  ├─view            视图目录
+│  │  │  ├─index       首页目录
+│  │  │  ├─login       登录目录
+│  │  │  └─public      公共目录
+│  │  ├─common.php      后台公共函数
+│  │  └─config.php      模块配置文件
+│  │
+│  ├─wap                =====手机端目录=====
+│  │  ├─controller      控制器目录
+│  │  │  └─AuthController.php        wap基类
+│  │  ├─model           模型目录
+│  │  │  ├─merchant    后台目录
+│  │  │  ├─store       商城目录
+│  │  │  └─user        用户目录
+│  │  ├─view           视图目录
+│  │  │  ├─index       首页目录
+│  │  │  ├─login       登录目录
+│  │  │  ├─public      公共目录
+│  │  │  ├─store       商城目录
+│  │  │  ├─merchant    商户目录
+│  │  │  ├─article     文章目录
+│  │  │  ├─my          用户目录
+│  │  │  └─service     客服目录
+│  │  ├─common.php     ap公共函数
+│  │  └─config.php     模块配置文件
+│  │
+│  ├─routine           =====小程序接口目录=====
+│  │  ├─controller     控制器目录
+│  │  │  ├─AuthController.php   小程序请求基类
+│  │  │  ├─Login.php    小程序登录请求接口
+│  │  │  ├─Routine.php  小程序登支付回调
+│  │  │  └─AuthApi.php  所有接口入口
+│  │  ├─model           模型目录
+│  │  │  ├─article     内容管理
+│  │  │  ├─routine     小程序相关
+│  │  │  ├─store       电商相关
+│  │  │  └─user        用户目录
+│  │
+│  ├─command.php        命令行工具配置文件
+│  ├─common.php         公共函数文件
+│  ├─config.php         公共配置文件
+│  ├─route.php          路由配置文件
+│  ├─tags.php           应用行为扩展定义文件
+│  ├─version.php        版本文件
+│  └─database.php       数据库配置文件
+│
+│─wx_view               =====小程序模版=====
+├─public                公共目录
+│  ├─static              全局静态文件目录
+│  │    ├─plug           第三方插件前后台公用
+│  │    ├─css            css前后台公用
+│  │    └─js             js前后台公用
+│  ├─system              后台静态文件目录
+│  │    ├─plug           第三方插件后台
+│  │    ├─js             后台js
+│  │    ├─css            后台css
+│  │    ├─images         后台images
+│  │    ├─frame          后台框架
+│  │    ├─module         后台功能模块
+│  │    ├─plug           后台第三方插件
+│  │    └─util           后台自定义常用工具
+│  ├─wap                  前台静态文件目录
+│  │   ├──first           模版1
+│  ├─install              程序安装文件目录
+│  ├─uploads              上传文件目录
+│  │   ├─attach              后太素材管理中所有图片
+│  │   ├─config/image        配置上传图片目录
+│  │   ├─config/file         配置上传文件目录
+│  │   ├─codepath/product    小程序产品海报二维码目录
+│  │   ├─editor              后台文本编辑框上传图片目录
+│  │   ├─routine/code        小程序推广二维码目录
+│  │   ├─store/comment       产品评论图片目录
+│  │   ├─wechat/media/       公众号客服上传图片目录
+│  │   ├─poster         小程序海报图目录
+│  │   ├─upgrade        在线升级目录
+│  │   ├─wechat         微信公众号关键词回复目录
+│  ├─backup              数据库备份目录
+│  ├─router.php           路由文件
+│  ├─index.php            程序入口文件
+│  ├─mysql.php            数据字典工具
+│  ├─.htaccess            apache 环境伪静态文件
+│  ├─nginx.conf           nginx 环境伪静态文件
+│  └─web.config           iis 环境伪静态文件
+│
+├─thinkphp              框架系统目录
+│  ├─lang               语言文件目录
+│  ├─library            框架类库目录
+│  │  ├─think           Think类库包目录
+│  │  └─traits          系统Trait目录
+│  ├─tpl                系统模板目录
+│  ├─base.php           基础定义文件
+│  ├─console.php        控制台入口文件
+│  ├─convention.php     框架惯例配置文件
+│  ├─helper.php         助手函数文件
+│  ├─phpunit.xml        phpunit配置文件
+│  └─start.php          框架入口文件
+│
+├─extend                扩展类库目录
+│  ├─api               公共api目录
+│  ├─basic             基础继承类目录
+│  ├─behavior          全局行为目录
+│  │  ├─system        后台行为
+│  │  ├─wechat        公众号用户行为
+│  │  ├─routine       小程序用户行为
+│  │  ├─merchant      商户行为
+│  │  └─wap           wap端行为
+│  ├─service           全局服务目录
+│  └─traits            公共特性目录
+│
+├─vendor               composer扩展类库目录
+│  ├─xaboy             后台快速创建表单类
+│  ├─tp5er             数据库备份类
+│  ├─phpoffice         表格操作类
+│  ├─overtrue          微信接口类
+│  └─traits            公共特性目录
+│
+├─runtime               应用的运行时目录（可写，可定制）
+├─vendor                第三方类库目录（Composer依赖库）
+├─index.php             入口文件
+├─composer.json         composer 定义文件
+├─LICENSE.txt           授权说明文件
+├─README.md             README 文件
+├─think                 命令行入口文件
+│  ├─index.php          入口文件
+│  ├─router.php         快速测试文件
+│  └─.htaccess          用于apache的重写
