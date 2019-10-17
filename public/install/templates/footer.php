@@ -1,1 +1,5 @@
-<div class="footer"> &copy; 2014-2018 <a href="http://www.crmeb.com" target="_blank">www.crmeb.com</a> 西安众邦网络科技有限公司出品</div>
+<div class="footer">
+    &copy; 2019-2020
+    <span style="padding-left: 20px"><a href="#" target="_blank">KaiYiLife</a></span>
+    <span style="padding-left: 20px">徐州凯易商务服务有限公司</span>
+</div>

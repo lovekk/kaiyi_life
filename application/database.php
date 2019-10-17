@@ -6,7 +6,7 @@
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
-// | Author: honor <rongyao_xu@163.com>
+// | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
 return [
@@ -15,11 +15,11 @@ return [
     // 服务器地址
     'hostname'        => 'localhost',
     // 数据库名
-    'database'        => 'gitcrmeb',
+    'database'        => 'kaiyi_life',
     // 用户名
-    'username'        => 'gitcrmeb',
+    'username'        => 'root',
     // 密码
-    'password'        => 'y3NfiJTjRp8PNeee',
+    'password'        => 'root',
 
     // 端口
     'hostport'        => '3306',
@@ -30,7 +30,7 @@ return [
     // 数据库编码默认采用utf8
     'charset'         => 'utf8',
     // 数据库表前缀
-    'prefix'          => 'eb_',
+    'prefix'          => 'tb_',
     // 数据库调试模式
     'debug'           => false,
     // 数据库部署方式:0 集中式(单一服务器),1 分布式(主从服务器)

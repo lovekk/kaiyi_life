@@ -1,5 +1,3 @@
-# URL重写
-# 可以通过URL重写隐藏应用的入口文件index.php
 <IfModule mod_rewrite.c>
   Options +FollowSymlinks -Multiviews
   RewriteEngine On

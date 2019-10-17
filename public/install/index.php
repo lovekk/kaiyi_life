@@ -39,8 +39,8 @@ if (!file_exists(SITEDIR . 'install/' . $sqlFile) || !file_exists(SITEDIR . 'ins
     echo '缺少必要的安装文件!';
     exit;
 }
-$Title = "CrmEb安装向导";
-$Powered = "Powered by CrmEb";
+$Title = "凯易-安装向导";
+$Powered = "Powered by KY";
 $steps = array(
     '1' => '安装许可协议',
     '2' => '运行环境检测',
