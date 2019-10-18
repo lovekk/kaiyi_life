@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>CRMEB管理系统</title>
+    <title>凯易生活-管理系统</title>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
@@ -37,8 +37,7 @@
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a class="J_menuItem admin_close" href="{:Url('setting.systemAdmin/adminInfo')}">个人资料</a>
                             </li>
-                            <li><a class="admin_close" target="_blank" href="http://www.crmeb.com/">联系我们</a>
-                            </li>
+                            <!--<li><a class="admin_close" target="_blank" href="http://www.crmeb.com/">联系我们</a></li>-->
                             <li class="divider"></li>
                             <li><a href="{:Url('Login/logout')}">安全退出</a>
                             </li>
@@ -47,7 +46,7 @@
                     <div class="logo-element">CB
                     </div>
                 </li>
-                <!--  菜单  -->
+                <!--  ==================================================菜单==================================================  -->
                 {volist name="menuList" id="menu"}
                 <?php if(isset($menu['child']) && count($menu['child']) > 0){ ?>
                     <li>
@@ -147,7 +146,7 @@
         </div>
         <!--底部版权-->
         <div class="footer"  @touchmove.prevent>
-            <div class="pull-right">© 2014-2018 <a href="http://www.crmeb.com/" target="_blank">CRMEB</a>
+            <div class="pull-right">© 2019-2020 【凯易生活】
             </div>
         </div>
     </div>
@@ -173,23 +172,6 @@
                     <div class="sidebar-title">
                         <h3><i class="fa fa-comments-o"></i> 最新通知</h3>
                         <small><i class="fa fa-tim"></i> 您当前有0条未读信息</small>
-                    </div>
-                    <div>
-                        <!--<div class="sidebar-message">
-                            <a href="#">
-                                <div class="pull-left text-center">
-                                    <img alt="image" class="img-circle message-avatar" src="http://ozwpnu2pa.bkt.clouddn.com/a1.jpg">
-                                    <div class="m-t-xs">
-                                        <i class="fa fa-star text-warning"></i> <i class="fa fa-star text-warning"></i>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-
-                                    据天津日报报道：瑞海公司董事长于学伟，副董事长董社轩等10人在13日上午已被控制。 <br>
-                                    <small class="text-muted">今天 4:21 <a class="J_menuItem admin_close" href="/admin/setting.system_admin/admininfo.html" data-index="0">【查看】</a></small>
-                                </div>
-                            </a>
-                        </div>-->
                     </div>
                 </div>
                 <div id="tab-2" class="tab-pane ">

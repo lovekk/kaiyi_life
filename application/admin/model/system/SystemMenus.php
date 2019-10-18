@@ -86,6 +86,8 @@ class SystemMenus extends ModelBasic
         return strtolower($module.'/'.$controller.'/'.$action.'/'.SystemMenus::paramStr($route));
     }
 
+
+    //获取菜单
     public static function tidyMenuTier($adminFilter = false,$menusList,$pid = 0,$navList = [])
     {
         static $allAuth = null;

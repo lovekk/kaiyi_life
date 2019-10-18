@@ -1,4 +1,5 @@
 <!-- 返回首页 -->
+<!-- 悬浮的房子 -->
 <view class="view" style=" top:{{top}}px;" catchtouchmove="setTouchMove">
   <navigator url='/pages/index/index' hover-class='none' open-type = "switchTab" >
      <image src="/images/home.png"></image>

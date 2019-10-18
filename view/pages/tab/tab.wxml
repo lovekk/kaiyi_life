@@ -1,0 +1,10 @@
+
+<view class="nav">
+    <view class="{{style[0]}}" bind:tap="tabFun" data-id="{{0}}">学生用户</view>
+    <view class="{{style[1]}}" data-id="{{1}}" bind:tap="tabFun">小区用户</view>
+</view>
+
+<view class="cnt">
+    <view hidden="{{show[0]}}">我就是内容1</view>
+    <view hidden="{{show[1]}}">我就是内容2</view>
+</view>

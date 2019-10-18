@@ -1,4 +1,14 @@
-<!--banner-->
+<!-- =======首页======= -->
+
+<!-- 定位 -->
+<view class='new-product-loc'>
+  <view class='title-bar-loc'>
+    <view class='iconfont icon-dizhi1'></view>
+    <text>定位</text>
+  </view>
+</view>
+
+<!--轮播图-->
 <view class='swiper_banner'>
   <swiper class="swiper-box" style="height:400rpx" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActivecolor}}">
     <block wx:for="{{imgUrls}}" wx:key="key">
@@ -8,6 +18,7 @@
     </block>
   </swiper>
 </view>
+
 <!-- 导航  -->
 <view class='nav flex'>
   <block wx:for="{{menus}}" wx:key="key">
@@ -23,6 +34,53 @@
     </view>
   </block>
 </view>
+
+<!-- 最新文章 导航-->
+<view class='slider-hot'>
+  <navigator class='img-box' url="/pages/new-list/new-list"></navigator>
+  <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="3000">
+    <block wx:for="{{hotListArticle}}" wx:key>
+      <navigator url="/pages/new-con/new-con?id={{item.id}}" open-type="navigate">
+        <swiper-item>
+          <view class="swiper_item">{{item.title}}</view>
+        </swiper-item>
+      </navigator>
+    </block>
+  </swiper>
+</view>
+<!-- 垃圾分类回收 导航-->
+<view class='new-product'>
+  <view class='title-bar'>
+    <view class='iconfont icon-collect'></view>
+    <text>垃圾分类回收</text>
+  </view>
+  <view class='nav-3 flex'>
+    <!-- <block wx:for="{{menus}}" wx:key="key"> -->
+      <view class='nav-item'>
+        <navigator class='flex' hover-class="none" url='/pages/new-con/new-con?id=1'>
+          <image src='../../images/nav-02.png'></image>
+          <view class='nav-title'>回收简介</view>
+        </navigator>
+    
+      </view>
+      <view class='nav-item'>
+        <navigator class='flex' hover-class="none" url=''>
+          <image src='../../images/nav-02.png'></image>
+          <view class='nav-title'>回收简介</view>
+        </navigator>
+    
+      </view>
+      <view class='nav-item'>
+        <navigator class='flex' hover-class="none" url=''>
+          <image src='../../images/nav-02.png'></image>
+          <view class='nav-title'>回收简介</view>
+        </navigator>
+    
+      </view>
+    <!-- </block> -->
+  </view>
+</view>
+
 <!-- 精品推荐 -->
 <view class='new-product'>
   <view class='title-bar' bindtap='torday' >

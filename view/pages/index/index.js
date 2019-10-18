@@ -20,6 +20,7 @@ Page({
     recommendList:[],
     newList:[],
     hotList:[],
+    hotListArticle:[],
     benefitList:[],
     likeList:[],
     offset: 0,
@@ -80,6 +81,19 @@ Page({
           lovely: res.data.data.lovely,//猜猜你喜欢上面广告位
           menus: res.data.data.menus,//导航
           likeList: res.data.data.like//猜猜喜欢
+        })
+      }
+    })
+  },
+  // 最新文章 一篇
+  getArticleHot:function(){
+    var that = this;
+    wx.request({
+      url: app.globalData.url + '/routine/auth_api/get_article_hot?uid=' + app.globalData.uid,
+      method: 'GET',
+      success: function (res) {
+        that.setData({
+          hotListArticle: res.data.data
         })
       }
     })

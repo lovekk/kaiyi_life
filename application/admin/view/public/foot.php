@@ -1,3 +1,3 @@
 <div class="layout-copy">
-    2017 &copy; crmEb
+    2019 &copy; 【凯易生活】
 </div>

@@ -29,7 +29,7 @@ App({
     spreadid: 0,//推广人二维码ID 2.5.36
     spid:0,//推广人二维码ID
     urlImages: '',
-    url: 'https://shop.crmeb.net/',
+    url: 'http://local.kaiyilife.com/index.php',
   },
   //获取小程序配置
   getRoutineConfig:function(){

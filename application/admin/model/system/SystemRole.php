@@ -49,6 +49,8 @@ class SystemRole extends ModelBasic
         return self::tidyAuth($_auth?:[]);
     }
 
+
+    //获取所有权限
     public static function getAllAuth()
     {
         static $auth = null;

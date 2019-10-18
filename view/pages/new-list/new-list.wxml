@@ -1,5 +1,6 @@
 <!--pages/new-list/new-list.wxml-->
-<view class='top-banner img-wrapper'>
+<!-- 新闻列表页 -->
+<!-- <view class='top-banner img-wrapper'>
 	<swiper class="swiper-box" indicator-dots="{{indicatorDots}}"
 		autoplay="true" interval="{{interval}}" duration="{{duration}}" indicator-dots="true" indicator-color="rgba(255,255,255,.5)" indicator-active-color="#fc3b3b">
 		<block wx:for="{{bannerList}}">
@@ -14,7 +15,8 @@
 			</swiper-item>
 		</block>
 	</swiper>
-</view>
+</view> -->
+<!-- 头部 最新公告 -->
 <view class='slider-hot'>
   <view class='img-box'></view>
   <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="3000">
@@ -27,6 +29,8 @@
     </block>
   </swiper>
 </view>
+
+<!-- 新闻列表 -->
 <view class='list-wrapper'>
 <block wx:for="{{newList}}">
   <view class='list-item'>

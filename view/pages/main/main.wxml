@@ -1,3 +1,4 @@
+<!-- 账户余额页面 -->
 <view class="header">
    <view class='header-bg'>
       <view class="header-yu">当前余额（元）</view>
