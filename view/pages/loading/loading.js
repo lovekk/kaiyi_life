@@ -63,11 +63,6 @@ Page({
               that.showlogin(false);
               //解密获取用户信息
               that.getUserInfoBydecryptCode();
-              // 跳转到选择学校
-              wx.navigateTo({
-                url: '/pages/tab/tab',
-              })
-              
             },
             fail: function () {
               that.showlogin(false);

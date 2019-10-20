@@ -1,5 +1,8 @@
 <!-- =======首页======= -->
 
+
+<!-- 跳转没有回退的  尽量少用 -->
+<!-- <navigator url="/pages/scroll/scroll" open-type="redirectTo">跳转没有回退的</navigator> -->
 <!-- 定位 -->
 <view class='new-product-loc'>
   <view class='title-bar-loc'>
