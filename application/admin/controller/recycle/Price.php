@@ -7,7 +7,7 @@ use service\UtilService as Util;
 use service\JsonService as Json;
 use think\Request;
 use think\Url;
-use app\admin\model\system\School as SchoolModel;
+use app\admin\model\system\Recycle as RecycleModel;
 use app\admin\controller\AuthController;
 
 /**
@@ -15,7 +15,7 @@ use app\admin\controller\AuthController;
  * Class SystemMenus
  * @package app\admin\controller\system
  */
-class School extends AuthController
+class Price extends AuthController
 {
 
 
@@ -28,7 +28,7 @@ class School extends AuthController
         $params = Util::getMore([
             ['keyword','']
         ],$this->request);
-        $this->assign(SchoolModel::systemPage($params));
+        $this->assign(RecycleModel::systemPage($params));
         $this->assign(compact('params'));
         return $this->fetch();
     }
@@ -66,7 +66,7 @@ class School extends AuthController
             ['is_show',0]
         ],$request);
         if(!$data['name']) return Json::fail('请输入学校/小区名称');
-        SchoolModel::set($data);
+        RecycleModel::set($data);
         return Json::successful('添加学校/小区成功!');
     }
 
@@ -79,7 +79,7 @@ class School extends AuthController
      */
     public function edit($id)
     {
-        $menu = SchoolModel::get($id);
+        $menu = RecycleModel::get($id);
         if(!$menu) return Json::fail('数据不存在!');
         $formbuider = [
             Form::input('name','学校/小区名称',$menu['name']),
@@ -108,8 +108,8 @@ class School extends AuthController
             ['sort',0],
             ['is_show',0]],$request);
         if(!$data['name']) return Json::fail('请输入学校/小区名称');
-        if(!SchoolModel::get($id)) return Json::fail('编辑的记录不存在!');
-        SchoolModel::edit($data,$id);
+        if(!RecycleModel::get($id)) return Json::fail('编辑的记录不存在!');
+        RecycleModel::edit($data,$id);
         return Json::successful('修改成功!');
     }
 
@@ -123,7 +123,7 @@ class School extends AuthController
     public function delete($id)
     {
         if(!$id) return $this->failed('参数错误，请重新打开');
-        $res = SchoolModel::destroy($id);
+        $res = RecycleModel::destroy($id);
         if(!$res)
             return Json::fail(ExpressModel::getErrorInfo('删除失败,请稍候再试!'));
         else

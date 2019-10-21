@@ -23,7 +23,7 @@
 </view>
 
 <!-- 导航  -->
-<view class='nav flex'>
+<!-- <view class='nav flex'>
   <block wx:for="{{menus}}" wx:key="key">
     <view class='nav-item'>
       <navigator class='flex' hover-class="none" url='{{item.url}}' wx:if="{{item.show == '是'}}" open-type='switchTab'>
@@ -36,7 +36,7 @@
       </navigator>
     </view>
   </block>
-</view>
+</view> -->
 
 <!-- 最新文章 导航-->
 <view class='slider-hot'>
@@ -69,14 +69,14 @@
       <view class='nav-item'>
         <navigator class='flex' hover-class="none" url=''>
           <image src='../../images/nav-02.png'></image>
-          <view class='nav-title'>回收简介</view>
+          <view class='nav-title'>回收价格</view>
         </navigator>
     
       </view>
       <view class='nav-item'>
         <navigator class='flex' hover-class="none" url=''>
           <image src='../../images/nav-02.png'></image>
-          <view class='nav-title'>回收简介</view>
+          <view class='nav-title'>回收预约</view>
         </navigator>
     
       </view>

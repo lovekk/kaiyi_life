@@ -25,7 +25,7 @@ Page({
           success(res) {
             //第一次弹窗允许授权
             if (!res.authSetting['scope.userInfo'] || !wx.getStorageSync('session_key')) {
-              that.showlogin(false, 2500);
+              that.showlogin(true, 2500);
             } else {
               //第二次直接调用获取用户信息
               that.getUserInfoBydecryptCode();
@@ -75,8 +75,9 @@ Page({
       }
     })
   },
+  
   //解密获取用户信息
-  getUserInfoBydecryptCode: function (e) {
+  getUserInfoBydecryptCode: function (res) {
     var that = this;
     wx.getUserInfo({
       lang: 'zh_CN',
@@ -129,6 +130,7 @@ Page({
       fail: function () {
       },
     })
+
   },
   //是否显示登录授权框
   showlogin:function(ishouw,times = 1500){

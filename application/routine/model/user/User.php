@@ -67,6 +67,7 @@ class User extends ModelBasic
         if($uid) return $uid;
         else return 0;
     }
+
     public static function getUserInfo($uid)
     {
         $userInfo = self::where('uid',$uid)->find();
