@@ -1,3 +1,5 @@
+
+<!-- 新增地址页面 -->
 <form bindsubmit="formSubmit">
         <view class='information'>
             <view class='information-li flex'><label>姓名</label><input type='text' placeholder='请输入姓名' placeholder-class='placeholder' name="name" value='{{userAddress.real_name}}'/></view>

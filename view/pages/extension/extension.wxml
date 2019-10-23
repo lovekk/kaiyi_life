@@ -1,3 +1,5 @@
+
+<!-- 推广统计页 -->
 <view class="header">
     <view class='header-bg'>
        <view class='money'>{{userinfo.now_money}}</view>

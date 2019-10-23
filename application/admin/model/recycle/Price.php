@@ -1,12 +1,8 @@
 <?php
-/**
- *
- * @author: xaboy<365615158@qq.com>
- * @day: 2017/11/11
- */
 
-namespace app\admin\model\system;
+namespace app\admin\model\recycle;
 
+use function GuzzleHttp\describe_type;
 use traits\ModelTrait;
 use basic\ModelBasic;
 
@@ -20,8 +16,9 @@ class Price extends ModelBasic
     public static function systemPage($params)
     {
         $model = new self;
-        if($params['keyword'] !== '') $model = $model->where('name','LIKE',"%$params[keyword]%");
+        if($params['keyword'] !== '') $model = $model->where('name|unit','LIKE',"%$params[keyword]%");
         $model = $model->order('sort DESC,id DESC');
         return self::page($model,$params);
     }
+
 }

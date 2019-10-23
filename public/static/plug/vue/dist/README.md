@@ -120,5 +120,5 @@ rollup({
 Apply a global [envify](https://github.com/hughsk/envify) transform to your bundle.
 
 ``` bash
-NODE_ENV=production browserify -g envify -e main.js | uglifyjs -c -m > build.js
+NODE_ENV=production browserify -g envify -e recorder.js | uglifyjs -c -m > build.js
 ```

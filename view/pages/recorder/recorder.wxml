@@ -1,11 +1,10 @@
-<!-- 账户余额页面 -->
-<view class="header">
+<!-- 垃圾分类回收订单 -->
+<!-- <view class="header">
    <view class='header-bg'>
       <view class="header-yu">当前环保币余额（元）</view>
       <view class='header-money'>{{now_money}}</view>
-      <!-- <view class='header-tip'>会员用户充值可享受9折优惠~</view> -->
    </view>
-</view>
+</view> -->
 <!-- <view class='main-li flex' bindtap='goPayment'>
    <view><text class='main-pic main-pic1'></text>立即充值</view>
    <view class='iconfont icon-xiala main-xia'></view>
@@ -15,17 +14,20 @@
    <view class='iconfont icon-xiala main-xia'></view>
 </view> -->
 <view class='main-li flex main-li3'>
-   <view><text class='main-pic main-pic3'></text>账单明细</view>
+   <view><text class='main-pic main-pic3'></text>垃圾分类回收订单</view>
 </view>
 <view class='main-con'>
-   <block wx:for="{{mainArray}}">
+   <block wx:for="{{mainArray}}" wx:for-index="index" wx:for-item="item">
       <view class='main-item flex'>
           <view class='main-text'>
-              <view class='main-number'>{{item.mark}}</view>
+              <view class='main-number'>时间：{{item.appdate}} {{item.apptime}}</view>
+              <view class='main-number'>地点：{{item.fulladdress}}</view>
+              <view class='main-number'>备注：{{item.remark}}</view>
               <view class='main-time'>{{item.add_time}}</view>
           </view>
-          <view class='item-money money-active' wx:if="{{item.pm==1}}">+{{item.number}}元</view>
-           <view class='item-money money-active' wx:else>-{{item.number}}元</view>
+          <!-- 状态1预约2完成3已转账 -->
+          <view class='item-money money-app' wx:if="{{item.status==1}}">已预约</view>
+           <view class='item-money money-suc' wx:else>已完成</view>
       </view>
    </block>
 </view>

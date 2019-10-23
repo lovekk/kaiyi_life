@@ -1,0 +1,15 @@
+
+<!-- 推广统计页 -->
+<view class="header">
+    <view class='tip'>回收物品价格</view>
+</view>
+<view class='exten-item'>
+    <block wx:for="{{priceinfo}}" wx:for-index="idx" wx:for-item="itemName">
+        <view class='exten-list flex'>
+        <view><text class='exten-bg4 exten-bg'></text>{{itemName.name}}</view>
+        <view class='exten-money'>{{itemName.money}}{{itemName.unit}}</view>
+        </view>
+    </block>
+</view>
+
+

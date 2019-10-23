@@ -44,7 +44,12 @@
     "pages/unshop/unshop",
     "pages/main/main",
     "pages/collect/collect",
-    "pages/promotion-card/promotion-card"
+    "pages/promotion-card/promotion-card",
+    "pages/price/price",
+    "pages/recycle/recycle",
+    "pages/recorder/recorder",
+    "pages/recycle-card/recycle-card"
+
   ],
   "window": {
     "backgroundTextStyle": "light",

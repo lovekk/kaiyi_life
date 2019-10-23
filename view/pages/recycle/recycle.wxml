@@ -1,0 +1,62 @@
+<!-- <view style="padding-top:20rpx;padding-bottom:40rpx">
+    <view wx:if="{{app_date}}"><view style="color:green">已经成功预约√ {{app_date}}</view></view>
+    <view wx:else >
+        暂未预约，请填写：
+    </view>
+</view> -->
+<view style="padding-top:20rpx;padding-bottom:20rpx">请填写：</view>
+<!-- 新增地址页面 -->
+<form bindsubmit="recycleSubmit">
+    <view class='information'>
+        <view class='information-li flex'>
+            <label>姓名:</label>
+            <input type='text' placeholder-class='placeholder' placeholder='请输入姓名'  name="name" value='{{userAddress.real_name}}'/>
+        </view>
+
+        <view class='information-li flex'>
+            <label>联系电话:</label>
+            <input type='number' placeholder-class='placeholder' placeholder='请输入联系电话' name="phone" value='{{userAddress.phone}}'></input>
+        </view>
+
+        <view class='information-li flex'>
+            <label>所在地区:</label>
+            <input type='text' placeholder-class='placeholder' placeholder='请输入所在地区' name="area"  
+            value='{{userAddress.province}}-{{userAddress.city}}-{{userAddress.district}}'></input>
+        </view>
+
+        <view class='information-li flex'>
+            <label>详细地址:</label>
+            <input type='text' placeholder-class='placeholder' placeholder='请输入详细地址' name="fulladdress" value='{{userAddress.detail}}'></input>
+        </view>
+
+        <view class='information-li flex'>
+            <label>主要物品:</label>
+            <input type='text' placeholder-class='placeholder' placeholder='请输入主要物品'  name="goods" value='废纸箱'/>
+        </view>
+
+        <view class='information-li flex'>
+            <label>上门时间:</label>
+            <picker class='cen' bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                <input type='text' placeholder-class='placeholder' placeholder='请点击选择时间' name="apptime" value='{{array[index]}}'></input>
+            </picker>
+        </view>
+
+        <view class='information-li flex'>
+            <label>上门日期:</label>
+            <picker class='cen' mode="date" value="{{date}}"  bindchange="bindDateChange">
+                <input type='text' placeholder-class='placeholder' placeholder='请点击选择日期' name="appdate" value='{{date}}'></input>
+            </picker>
+        </view>
+
+        <view class='information-li flex'>
+            <label>备注(选填):</label>
+            <input type='text' placeholder-class='placeholder' placeholder='请输入主要物品'  name="remark" value=' '/>
+        </view>
+    </view>
+
+    <view>*自动读取默认地址</view>
+    <view>*如需修改请到[我的]-[地址管理]-[设为默认地址]</view>
+
+    <button class='but' formType="submit">预约</button>
+</form>
+    

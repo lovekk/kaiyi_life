@@ -2,6 +2,8 @@
 namespace app\routine\controller;
 
 use Api\Express;
+use app\routine\model\recycle\Price;
+use app\routine\model\recycle\RecycleAppointment;
 use app\routine\model\routine\RoutineCode;
 use app\routine\model\routine\RoutineFormId;
 use app\routine\model\routine\RoutineTemplate;
@@ -57,6 +59,59 @@ use app\routine\model\article\Article as ArticleModel;
  */
 class AuthApi extends AuthController{
 
+
+    //============分类回收 开始=================
+    /**
+     * get回收价格
+     * @return \think\response\Json
+     */
+    public function get_price(){
+        $data = Price::getPrice('name,money,unit');
+        return JsonService::successful($data);
+    }
+
+
+    /**
+     * 添加预约
+     * @return \think\response\Json
+     */
+    public function add_recycle()
+    {
+        $request = Request::instance();
+        if(!$request->isPost()) return JsonService::fail('参数错误!');
+        $recycleInfo = UtilService::postMore([
+            ['name',''],
+            ['phone',''],
+            ['area',''],
+            ['fulladdress',''],
+            ['goods',''],
+            ['apptime',''],
+            ['appdate',''],
+            ['remark',''],
+        ],$request);
+        $recycleInfo['uid'] = $this->userInfo['uid'];
+        $recycleInfo['nickname'] = $this->userInfo['nickname'];
+        $recycleInfo['add_time'] = time();
+
+        if($rec = RecycleAppointment::set($recycleInfo)){
+            return JsonService::successful($rec);
+        }else
+            return JsonService::fail('添加回收预约失败!');
+    }
+
+
+    /**
+     * 回收订单
+     * @return \think\response\Json
+     */
+    public function get_recycle_order(){
+        $data = RecycleAppointment::getRecycleOrder('uid,phone,area,fulladdress,appdate,apptime,remark,status,add_time',$this->userInfo['uid']);
+        return JsonService::successful($data);
+    }
+
+
+    //============分类回收 结束=================
+
     /**
      * 获取用户信息
      * @return \think\response\Json
@@ -88,8 +143,8 @@ class AuthApi extends AuthController{
      * 首页
      */
     public function index(){
-        $banner = GroupDataService::getData('routine_home_banner')?:[];//banner图
-        $menus = GroupDataService::getData('routine_home_menus')?:[];//banner图
+        $banner = GroupDataService::getData('routine_home_banner')?:[];//banner图 轮播
+        $menus = GroupDataService::getData('routine_home_menus')?:[];//banner图  五个的导航
         $lovely = GroupDataService::getData('routine_lovely')?:[];//猜你喜欢图
         $best = StoreProduct::getBestProduct('id,image,store_name,cate_id,price,unit_name,sort',8);//精品推荐
         $new = StoreProduct::getNewProduct('id,image,store_name,cate_id,price,unit_name,sort',3);//首发
@@ -681,6 +736,7 @@ class AuthApi extends AuthController{
         else return JsonService::successful('empty',[]);
     }
 
+
     /**
      * 删除地址
      * @param string $addressId
@@ -696,6 +752,7 @@ class AuthApi extends AuthController{
         else
             return JsonService::fail('删除地址失败!');
     }
+
 
     /**
      * 创建订单
@@ -752,6 +809,7 @@ class AuthApi extends AuthController{
         }
     }
 
+
     /**
      * 获取订单列表
      * @param string $type
@@ -780,6 +838,7 @@ class AuthApi extends AuthController{
         return JsonService::successful($list);
     }
 
+
     /**
      * 订单详情页
      * @param string $order_id
@@ -795,6 +854,7 @@ class AuthApi extends AuthController{
         return JsonService::successful(StoreOrder::tidyOrder($order,true));
     }
 
+
     /**
      * 获取订单内的某个产品信息
      * @param string $uni
@@ -805,6 +865,8 @@ class AuthApi extends AuthController{
         if(!$unique || !StoreOrderCartInfo::be(['unique'=>$unique]) || !($cartInfo = StoreOrderCartInfo::where('unique',$unique)->find())) return JsonService::fail('评价产品不存在!');
         return JsonService::successful($cartInfo);
     }
+
+
     /**
      * 删除订单
      * @param string $uni
@@ -819,6 +881,8 @@ class AuthApi extends AuthController{
         else
             return JsonService::fail(StoreOrder::getErrorInfo());
     }
+
+
     //TODO 支付订单
     /**
      * 支付订单
@@ -879,6 +943,8 @@ class AuthApi extends AuthController{
         else
             return JsonService::fail(StoreOrder::getErrorInfo());
     }
+
+
     /**
      * 用户确认收货
      * @param string $uni
