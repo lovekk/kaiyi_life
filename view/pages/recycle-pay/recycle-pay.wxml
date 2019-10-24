@@ -1,0 +1,9 @@
+<form bindsubmit='submitSub' report-submit='true'>
+  <view class="pay-bg">
+      <view class='title'>转账-凯易币给：{{to_name}}</view>
+      <view class='title'>输入金额</view>
+      <view class='input flex'><text>￥</text><input type='digit' placeholder='0.00' placeholder-class='placeholder' name='number'></input></view>
+      <view class='tip'>提示：当前凯易币余额为 <text>￥{{userinfo.now_money}}</text></view>
+      <button class='but' form-type='submit'>立即转账</button>
+  </view>
+</form>

@@ -1,8 +1,8 @@
 <?php
 /**
  *
- * @author: xaboy<365615158@qq.com>
- * @day: 2018/01/05
+ * @author: zk
+ * @day: 2019/10/05
  */
 
 namespace app\routine\model\user;
@@ -42,6 +42,7 @@ class UserRecharge extends ModelBasic
 //        return RoutineService::payRoutine(WechatUser::uidToOpenid($orderInfo['uid']),$orderInfo['order_id'],$orderInfo['price'],'user_recharge','用户充值');
     }
 
+
     /**
      * //TODO用户充值成功后
      * @param $orderId
@@ -56,6 +57,21 @@ class UserRecharge extends ModelBasic
         $res2 = UserBill::income('用户余额充值',$order['uid'],'now_money','recharge',$order['price'],$order['id'],bcadd($user['now_money'],$order['price'],2),'成功充值余额'.floatval($order['price']).'元');
         $res3 = User::edit(['now_money'=>bcadd($user['now_money'],$order['price'],2)],$order['uid'],'uid');
         $res = $res1 && $res2 && $res3;
+        self::checkTrans($res);
+        return $res;
+    }
+
+
+    /**
+     * //TODO用户转账
+     * @param $orderId
+     */
+    public static function recyclePaySuccess($orderId)
+    {
+        self::beginTrans();
+        $res2 = UserBill::income('用户余额充值',$order['uid'],'now_money','recharge',$order['price'],$order['id'],bcadd($user['now_money'],$order['price'],2),'成功充值余额'.floatval($order['price']).'元');
+        $res3 = User::edit(['now_money'=>bcadd($user['now_money'],$order['price'],2)],$order['uid'],'uid');
+        $res = $res2 && $res3;
         self::checkTrans($res);
         return $res;
     }

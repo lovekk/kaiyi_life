@@ -61,6 +61,7 @@ Page({
     // }
     app.setUserInfo();
     that.getIndexInfo();
+    that.getArticleHot();
   },
   getIndexInfo:function(){
     var header = {

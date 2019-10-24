@@ -48,7 +48,8 @@
     "pages/price/price",
     "pages/recycle/recycle",
     "pages/recorder/recorder",
-    "pages/recycle-card/recycle-card"
+    "pages/recycle-card/recycle-card",
+    "pages/recycle-pay/recycle-pay"
 
   ],
   "window": {

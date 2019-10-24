@@ -50,6 +50,8 @@ use app\routine\model\store\StoreBargain;
 use app\routine\model\store\StoreBargainUser;
 use app\routine\model\store\StoreBargainUserHelp;
 use app\routine\model\article\Article as ArticleModel;
+use think\Db;
+use think\Model;
 
 /**
  * 小程序接口
@@ -107,6 +109,57 @@ class AuthApi extends AuthController{
     public function get_recycle_order(){
         $data = RecycleAppointment::getRecycleOrder('uid,phone,area,fulladdress,appdate,apptime,remark,status,add_time',$this->userInfo['uid']);
         return JsonService::successful($data);
+    }
+
+    /**
+     * 转账
+     * @param int $price
+     * @return \think\response\Json
+     */
+    public function user_recycle_pay()
+    {
+        /**
+         * 1.查询uid的钱，user_id的钱
+         * 2.判断uid的钱够不
+         * 3.user表两个更新  uid-price  user_id+price
+         * 4.user_bill表两个记录  转入  转出
+         * 5.完成
+         */
+
+        //传参
+        $request = Request::instance();
+        if(!$request->isPost()) return JsonService::fail('参数错误!');
+        $payInfo = UtilService::postMore([
+            ['to_uid',''],
+            ['to_name',''],
+            ['price',''],
+        ],$request);
+
+        $price = $payInfo['price'];
+        $to_uid = $payInfo['to_uid'];
+        $to_name = $payInfo['to_name'];
+
+        //0.判断传参数据
+        if(!$price || $price<=0) return JsonService::fail('转账金额错误');
+        if(!$to_uid || $to_uid<=0) return JsonService::fail('用户参数错误');
+
+        //1.查询uid的钱，user_id的钱
+        $uid_money = User::getUserMoney($this->userInfo['uid']);
+
+        $n_money = $uid_money - $price;
+        $mark = '转账'.$price.'凯易币';
+        //2.判断uid的钱够不
+        if ($n_money >= 0){
+
+            //3.user表两个更新  uid-price  user_id+price
+            //4.user_bill表两个记录  转入  转出
+
+            //$uid, $title, $category, $type, $number, $link_id=0, $balance=0, $mark='', $status=1, $user_id, $user_name
+            return UserBill::changeMoney($this->userInfo['uid'], '转账','now_money','transfer',$price,'0',$n_money,$mark,1,$to_uid,$to_name);
+        }else{
+            return JsonService::fail('余额不足');
+        }
+
     }
 
 

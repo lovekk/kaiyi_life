@@ -1,7 +1,7 @@
 <!-- 账户余额页面 -->
 <view class="header">
    <view class='header-bg'>
-      <view class="header-yu">当前环保币余额（元）</view>
+      <view class="header-yu">当前凯易币余额（元）</view>
       <view class='header-money'>{{now_money}}</view>
       <!-- <view class='header-tip'>会员用户充值可享受9折优惠~</view> -->
    </view>

@@ -47,12 +47,41 @@ Page({
 
   // 扫码
   getScancode: function() {
+    var header = {
+      'content-type': 'application/x-www-form-urlencoded',
+    };
     console.log(111)
     // 只允许从相机扫码
       wx.scanCode({
         onlyFromCamera: true,
         success (res) {
           console.log(res.result)
+          var str = res.result;
+          var arr = str.split("-");
+          var to_uid = parseInt(arr[0]);
+          var to_name = arr[1];
+          console.log(to_uid)
+          console.log(to_name)
+          wx.request({
+            url: app.globalData.url + '/routine/auth_api/my?uid=' + to_uid,
+            method: 'POST',
+            header: header,
+            success: function (res) {
+              console.log(res);
+              console.log(res.data.data);
+              if (res.data.code == 200 && res.data.data.nickname == to_name) {
+                wx.navigateTo({ //跳转至指定页面并关闭其他打开的所有页面（这个最好用在返回至首页的的时候）
+                  url: '/pages/recycle-pay/recycle-pay?to_uid=' + to_name + '&to_name=' + to_name
+                })
+              } else {
+                wx.showModal({
+                  title: '提示',
+                  content: "凯易币码有错误！"
+                })
+                
+              }
+            }
+          }); 
         }
       })
   },

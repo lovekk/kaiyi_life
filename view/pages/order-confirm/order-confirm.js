@@ -7,8 +7,8 @@ Page({
    */
   data: {
     cartArr: [
-      { "name": "微信", "icon": "icon-weixinzhifu", value:'weixin'},
-      { "name": "余额支付", "icon": "icon-yuezhifu", value: 'yue' },
+      { "name": "微信支付", "icon": "icon-weixinzhifu", value:'weixin'},
+      { "name": "凯易币支付", "icon": "icon-yuezhifu", value: 'yue' },
       // { "name": "线下付款", "icon": "icon-wallet", value: 'offline' },
       // { "name": "到店自提", "icon": "icon-dianpu", value: 'ziti'  },
     ],

@@ -31,8 +31,8 @@
   <!-- <view class='block-bar' bindtap='goCoupon'>
     <text class='title'>领券</text>
     <text>领取优惠券 </text>
-  </view> -->
-  <!-- <view class='block-bar integral'>
+  </view>
+  <view class='block-bar integral'>
     <text class='title'>积分</text>
     <text>购买可获得{{SeckillList.give_integral}}积分</text>
   </view> -->

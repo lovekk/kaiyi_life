@@ -8,7 +8,7 @@
          <image src='{{userinfo.avatar}}' class='pic'></image>
          <view class='white-name'>{{userinfo.nickname}}</view>
          <view class='ewm'>
-             <image src='http://qr.liantu.com/api.php?text=missyou'></image>
+             <image src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{userinfo.uid}}-{{userinfo.nickname}}'></image>
          </view>
          <!-- <view class='tip'>使用微信扫描二维码关注小程序</view> -->
         <view class='sao' bind:tap='getScancode'>扫一扫</view>

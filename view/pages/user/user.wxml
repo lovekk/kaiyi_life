@@ -18,7 +18,7 @@
    <view class='item-box amount flex'>
     <view class='amount-item' bindtap='money'>
       <view class='count'>{{userinfo.now_money}}</view>
-      <view class='text' >环保币</view>
+      <view class='text' >凯易币</view>
     </view>
     <view class='amount-item' bindtap='integral'>
       <view class='count'>{{userinfo.integral}}</view>
@@ -83,7 +83,7 @@
       <view class='item'>
         <navigator hover-class="none" url="/pages/recycle-card/recycle-card">
           <view class='iconfont icon-erweima1 icon-er'></view>
-          <view class='text'>环保币码</view>
+          <view class='text'>凯易币码</view>
         </navigator>
       </view>
       <view class='item'>
@@ -148,6 +148,7 @@
           <view class='text'>我要签到</view>
         </navigator>
       </view> -->
+      
     </view>
   </view>
   <view class='item-box orders'>

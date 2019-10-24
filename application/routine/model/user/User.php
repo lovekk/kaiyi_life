@@ -161,4 +161,27 @@ class User extends ModelBasic
     {
         return self::bcInc($uid,'integral',$integral,'uid');
     }
+
+
+    // 判断是否可以转 查询用户金钱
+    public static function getUserMoney($uid){
+        return self::where('uid',$uid)->value('now_money');
+    }
+
+    // 改变钱
+    public static function changeUserMoney($uid,$p,$n){
+        //1+ 2-
+        $m = self::getUserMoney($uid);
+        $m1 = $m + $p;
+        $m2 = $m - $p;
+        $re = "";
+        if ($n == 1){
+            $re = self::where('uid', $uid)->update(['now_money' => $m1]);
+        }elseif ($n == 2){
+            $re = self::where('uid', $uid)->update(['now_money' => $m2]);
+        }
+        return $re;
+    }
+
+
 }

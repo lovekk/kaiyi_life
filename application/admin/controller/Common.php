@@ -1,9 +1,4 @@
 <?php
-/**
- *
- * @author: xaboy<365615158@qq.com>
- * @day: 2017/12/07
- */
 
 namespace app\admin\controller;
 
