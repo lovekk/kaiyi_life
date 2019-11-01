@@ -87,6 +87,10 @@
                     <script type="text/html" id="checkboxstatus">
                         <input type='checkbox' name='id' lay-skin='switch' value="{{d.id}}" lay-filter='is_show' lay-text='上架|下架'  {{ d.is_show == 1 ? 'checked' : '' }}>
                     </script>
+                    <!--区域-->
+                    <script type="text/html" id="school_name">
+                        <span>{{d.school_name}}</span>
+                    </script>
                     <!--收藏-->
                     <script type="text/html" id="like">
                         <span><i class="layui-icon layui-icon-praise"></i> {{d.like}}</span>
@@ -102,8 +106,8 @@
                         {{# if(d.cate_name!=''){ }}
                         <p>分类:{{d.cate_name}}</p>
                         {{# } }}
-                        <p>访客量:{{d.visitor}}</p>
-                        <p>浏览量:{{d.browse}}</p>
+<!--                        <p>访客量:{{d.visitor}}</p>-->
+<!--                        <p>浏览量:{{d.browse}}</p>-->
                     </script>
                     <!--操作-->
                     <script type="text/html" id="act">
@@ -170,6 +174,7 @@
                     {field: 'id', title: 'ID', sort: true,event:'id',width:'6%'},
                     {field: 'image', title: '产品图片',templet:'#image',width:'10%'},
                     {field: 'store_name', title: '产品名称',templet:'#store_name'},
+                    {field: 'school_name', title: '区域',templet:'#school_name'},
                     {field: 'ficti', title: '虚拟销量',edit:'ficti',width:'8%'},
                     {field: 'stock', title: '库存',edit:'stock',width:'8%'},
                     {field: 'sort', title: '排序',edit:'sort',width:'6%'},

@@ -23,7 +23,7 @@
 .title-bar-loc{position: relative; display: flex; height: 60rpx; border-bottom: 1px solid #eaeaea; align-items: center;justify-content: left;padding-left: 20rpx}
 .title-bar-loc .iconfont{font-size: 40rpx; margin-right: 10rpx;}
 .title-bar-loc .icon-xiala{vertical-align:middle;font-size:30rpx; font-weight: bold;}
-.new-product-loc{background-color: #fff;}
+/* .new-product-loc{background-color: #fff;} */
 
 /* 横栏 标题 */
 .title-bar{position: relative; display: flex; height: 92rpx; border-bottom: 1px solid #eaeaea; align-items: center;justify-content: center;}
@@ -46,6 +46,11 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* 生活服务 */
+.shenghuo{height: 150rpx; width: 97%;padding-left:25rpx;}
+.shenghuo image{width: 97%; height: 150rpx;}
+.bor{border-radius: 20rpx;}
 
 .new-product{margin-top: 30rpx; background-color: #fff;}
 .scroll-product{width: 100%; overflow: hidden; white-space: nowrap; padding:25rpx 0 35rpx 30rpx; box-sizing: border-box;}

@@ -19,6 +19,7 @@ use app\admin\model\store\StoreProduct as ProductModel;
 use think\Url;
 
 use app\admin\model\system\SystemAttachment;
+use app\admin\model\system\School;
 
 
 /**
@@ -139,7 +140,16 @@ class StoreProduct extends AuthController
                     $menus[] = ['value'=>$menu['id'],'label'=>$menu['html'].$menu['cate_name'],'disabled'=>$menu['pid']== 0];//,'disabled'=>$menu['pid']== 0];
                 }
                 return $menus;
-            })->filterable(1)->multiple(1),
+            })->filterable(1),
+//                ->multiple(1),
+            Form::select('school_name','区域选择')->setOptions(function(){
+                $list = School::getSchool();
+                $menus=[];
+                foreach ($list as $menu){
+                    $menus[] = ['value'=>$menu['name'],'label'=>$menu['name']];
+                }
+                return $menus;
+            })->filterable(1),
             Form::input('store_name','产品名称')->col(Form::col(24)),
             Form::input('store_info','产品简介')->type('textarea'),
             Form::input('keyword','产品关键字')->placeholder('多个用英文状态下的逗号隔开'),
@@ -194,6 +204,7 @@ class StoreProduct extends AuthController
     {
         $data = Util::postMore([
             ['cate_id',[]],
+            'school_name',
             'store_name',
             'store_info',
             'keyword',
@@ -220,6 +231,7 @@ class StoreProduct extends AuthController
         if(count($data['cate_id']) < 1) return Json::fail('请选择产品分类');
         $data['cate_id'] = implode(',',$data['cate_id']);
         if(!$data['store_name']) return Json::fail('请输入产品名称');
+        if(!$data['school_name']) return Json::fail('请输入区域');
         if(count($data['image'])<1) return Json::fail('请上传产品图片');
         if(count($data['slider_image'])<1) return Json::fail('请上传产品轮播图');
         if($data['price'] == '' || $data['price'] < 0) return Json::fail('请输入产品售价');
@@ -265,7 +277,16 @@ class StoreProduct extends AuthController
                     $menus[] = ['value'=>$menu['id'],'label'=>$menu['html'].$menu['cate_name'],'disabled'=>$menu['pid']== 0];//,'disabled'=>$menu['pid']== 0];
                 }
                 return $menus;
-            })->filterable(1)->multiple(1),
+            })->filterable(1),
+//                ->multiple(1),
+            Form::select('school_name','区域选择')->setOptions(function(){
+                $list = School::getSchool();
+                $menus=[];
+                foreach ($list as $menu){
+                    $menus[] = ['value'=>$menu['name'],'label'=>$menu['name']];
+                }
+                return $menus;
+            })->filterable(1),
             Form::input('store_name','产品名称',$product->getData('store_name')),
             Form::input('store_info','产品简介',$product->getData('store_info'))->type('textarea'),
             Form::input('keyword','产品关键字',$product->getData('keyword'))->placeholder('多个用英文状态下的逗号隔开'),
@@ -306,6 +327,7 @@ class StoreProduct extends AuthController
     {
         $data = Util::postMore([
             ['cate_id',[]],
+            'school_name',
             'store_name',
             'store_info',
             'keyword',
@@ -331,6 +353,7 @@ class StoreProduct extends AuthController
         if(count($data['cate_id']) < 1) return Json::fail('请选择产品分类');
         $data['cate_id'] = implode(',',$data['cate_id']);
         if(!$data['store_name']) return Json::fail('请输入产品名称');
+        if(!$data['school_name']) return Json::fail('请输入区域');
         if(count($data['image'])<1) return Json::fail('请上传产品图片');
         if(count($data['slider_image'])<1) return Json::fail('请上传产品轮播图');
         if(count($data['slider_image'])>5) return Json::fail('轮播图最多5张图');

@@ -29,6 +29,7 @@
 
                             <th class="text-center">编号</th>
                             <th class="text-center">学校/小区名称</th>
+                            <th class="text-center">地区</th>
                             <th class="text-center">类型</th>
                             <th class="text-center">排序</th>
                             <th class="text-center">状态</th>
@@ -43,6 +44,9 @@
                             </td>
                             <td class="text-center">
                                 {$vo.name}
+                            </td>
+                            <td class="text-center">
+                                {$vo.location}
                             </td>
                             <td class="text-center" >
                                 {$vo.type}

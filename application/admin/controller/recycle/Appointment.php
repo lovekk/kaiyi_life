@@ -1,23 +1,20 @@
 <?php
 
-namespace app\admin\controller\system;
+namespace app\admin\controller\recycle;
 
 use service\FormBuilder as Form;
 use service\UtilService as Util;
 use service\JsonService as Json;
 use think\Request;
 use think\Url;
-use app\admin\model\system\School as SchoolModel;
+use app\admin\model\recycle\Appointment as AppointmentModel;
 use app\admin\controller\AuthController;
 
 /**
- * 学校/小区 管理 控制器
- * Class SystemMenus
- * @package app\admin\controller\system
+ * 回收预约  控制器
  */
-class School extends AuthController
+class Appointment extends AuthController
 {
-
 
     /**
      * 显示资源列表
@@ -28,7 +25,7 @@ class School extends AuthController
         $params = Util::getMore([
             ['keyword','']
         ],$this->request);
-        $this->assign(SchoolModel::systemPage($params));
+        $this->assign(AppointmentModel::systemPage($params));
         $this->assign(compact('params'));
         return $this->fetch();
     }
@@ -41,13 +38,12 @@ class School extends AuthController
     public function create($cid = 0)
     {
         $formbuider = [
-            Form::input('name','学校/小区名称')->required('学校/小区名称名称必填'),
-            Form::input('location','地区'),
-            Form::radio('type','类型',1)->options([['value'=>1,'label'=>'学校'],['value'=>2,'label'=>'小区']]),
+            Form::input('name','物品名称')->required('物品名称必填'),
+            Form::number('money','价格',0)->required('价格必填'),
+            Form::input('unit','单位[例:元/公斤2]')->required('单位必填'),
             Form::number('sort','排序',0),
-            Form::radio('is_show','是否启用',1)->options([['value'=>0,'label'=>'关闭'],['value'=>1,'label'=>'启用']]),
         ];
-        $form = Form::make_post_form('添加学校/小区',$formbuider,Url::build('save'),2);
+        $form = Form::make_post_form('添加回收物品',$formbuider,Url::build('save'),2);
         $this->assign(compact('form'));
         return $this->fetch('public/form-builder');
     }
@@ -62,14 +58,15 @@ class School extends AuthController
     {
         $data = Util::postMore([
             'name',
-            'location',
-            ['type',1],
-            ['sort',0],
-            ['is_show',0]
+            'money',
+            'unit',
+            'sort',
         ],$request);
-        if(!$data['name']) return Json::fail('请输入学校/小区名称');
-        SchoolModel::set($data);
-        return Json::successful('添加学校/小区成功!');
+        if(!$data['name']) return Json::fail('请输入物品名称');
+        if(!$data['money']) return Json::fail('请输入价格');
+        if(!$data['unit']) return Json::fail('请输入单位');
+        AppointmentModel::set($data);
+        return Json::successful('添加回收物品成功!');
     }
 
 
@@ -81,16 +78,16 @@ class School extends AuthController
      */
     public function edit($id)
     {
-        $menu = SchoolModel::get($id);
+        $menu = AppointmentModel::get($id);
         if(!$menu) return Json::fail('数据不存在!');
         $formbuider = [
-            Form::input('name','学校/小区名称',$menu['name']),
-            Form::input('location','地区',$menu['location']),
-            Form::radio('type','类型',$menu['type'])->options([['value'=>1,'label'=>'学校'],['value'=>2,'label'=>'小区']]),
+            Form::input('name','物品名称',$menu['name']),
+            Form::number('money','价格',$menu['money']),
+            Form::input('unit','单位[例:元/公斤，毛/个]',$menu['unit']),
             Form::number('sort','排序',$menu['sort']),
-            Form::radio('is_show','是否启用',$menu['is_show'])->options([['value'=>0,'label'=>'关闭'],['value'=>1,'label'=>'启用']])
+
         ];
-        $form = Form::make_post_form('添加学校/小区',$formbuider,Url::build('update',array('id'=>$id)),2);
+        $form = Form::make_post_form('添加回收物品',$formbuider,Url::build('update',array('id'=>$id)),2);
         $this->assign(compact('form'));
         return $this->fetch('public/form-builder');
     }
@@ -107,13 +104,15 @@ class School extends AuthController
     {
         $data = Util::postMore([
             'name',
-            'location',
-            ['type',1],
-            ['sort',0],
-            ['is_show',0]],$request);
-        if(!$data['name']) return Json::fail('请输入学校/小区名称');
-        if(!SchoolModel::get($id)) return Json::fail('编辑的记录不存在!');
-        SchoolModel::edit($data,$id);
+            'money',
+            'unit',
+            'sort',
+        ],$request);
+        if(!$data['name']) return Json::fail('请输入物品名称');
+        if(!$data['money']) return Json::fail('请输入价格');
+        if(!$data['unit']) return Json::fail('请输入单位');
+        if(!AppointmentModel::get($id)) return Json::fail('编辑的记录不存在!');
+        AppointmentModel::edit($data,$id);
         return Json::successful('修改成功!');
     }
 
@@ -127,7 +126,7 @@ class School extends AuthController
     public function delete($id)
     {
         if(!$id) return $this->failed('参数错误，请重新打开');
-        $res = SchoolModel::destroy($id);
+        $res = AppointmentModel::destroy($id);
         if(!$res)
             return Json::fail(ExpressModel::getErrorInfo('删除失败,请稍候再试!'));
         else

@@ -20,7 +20,7 @@
         <br>
         <h2 class="login-logo">
             <!--<img src="{__ADMIN_PATH}images/logo.png">-->
-            凯易-后台登录
+            凯易生活-后台登录
         </h2>
         <br>
         <form role="form" action="{:url('verify')}" method="post">

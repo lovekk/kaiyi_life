@@ -162,11 +162,22 @@ class User extends ModelBasic
         return self::bcInc($uid,'integral',$integral,'uid');
     }
 
+    // 是否选择学校
+    public static function isChoose($uid){
+        return self::where('uid',$uid)->value('school_name');
+    }
+
+    // 选择学校
+    public static function chooseOne($uid,$value){
+        return self::where('uid', $uid)->update(['school_name' => $value]);
+    }
+
 
     // 判断是否可以转 查询用户金钱
     public static function getUserMoney($uid){
         return self::where('uid',$uid)->value('now_money');
     }
+
 
     // 改变钱
     public static function changeUserMoney($uid,$p,$n){

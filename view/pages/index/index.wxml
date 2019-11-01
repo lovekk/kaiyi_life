@@ -8,7 +8,7 @@
   <view class='new-product-loc'>
     <view class='title-bar-loc'>
       <view class='iconfont icon-dizhi1'></view>
-      <text>定位</text>
+      <text>{{school_name}}</text>
     </view>
   </view>
 </navigator>
@@ -24,7 +24,7 @@
 </view>
 
 <!-- 导航  -->
-<view class='nav flex'>
+<!-- <view class='nav flex'>
   <block wx:for="{{menus}}" wx:key="key">
     <view class='nav-item'>
       <navigator class='flex' hover-class="none" url='{{item.url}}' wx:if="{{item.show == '是'}}" open-type='switchTab'>
@@ -37,7 +37,7 @@
       </navigator>
     </view>
   </block>
-</view>
+</view> -->
 
 <!-- 最新文章 导航-->
 <view class='slider-hot'>
@@ -65,21 +65,18 @@
           <image src='../../images/nav-02.png'></image>
           <view class='nav-title'>回收简介</view>
         </navigator>
-    
       </view>
       <view class='nav-item'>
         <navigator class='flex' hover-class="none" url='/pages/price/price'>
           <image src='../../images/nav-02.png'></image>
           <view class='nav-title'>回收价格</view>
         </navigator>
-    
       </view>
       <view class='nav-item'>
         <navigator class='flex' hover-class="none" url='/pages/recycle/recycle'>
           <image src='../../images/nav-02.png'></image>
           <view class='nav-title'>回收预约</view>
         </navigator>
-    
       </view>
     <!-- </block> -->
   </view>
@@ -108,6 +105,7 @@
     </scroll-view>
   </view>
 </view>
+
 <!-- 首发新品 -->
 <!-- <view class='today-new'>
   <view class='title-bar' bindtap='torday'>
@@ -129,8 +127,9 @@
     </block>
   </view>
 </view>  -->
+
 <!-- 热卖单品 -->
-<!-- <view class='new-product2'>
+<view class='new-product2'>
   <view class='title-bar' bindtap='torday' >
     <view class='iconfont icon-jingpintuijian'></view>
     <text>热卖单品</text>
@@ -152,7 +151,16 @@
       </block>  
     </scroll-view>
   </view>
-</view> -->
+</view>
+
+<!-- 生活服务 -->
+<view class="shenghuo">
+  <navigator class='flex' hover-class="none" url='/pages/recycle/recycle'>
+    <image class="bor" src='../../images/life2.png'></image>
+  </navigator>
+</view>
+
+<!-- 促销单品 -->
 <!-- <view class='today-new'>
   <view class='title-bar' bindtap='torday'>
     <view class='iconfont icon-shangxinfuwu'></view>
@@ -182,6 +190,7 @@
       <image src='{{url}}{{item.img}}'></image>
   </view>
 </block> -->
+
 <!-- 猜你喜欢 -->
 <view class='product-like'>
   <view class='title-bar'>

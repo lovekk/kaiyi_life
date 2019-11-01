@@ -114,6 +114,7 @@ Page({
                       url: app.globalData.openPages
                     })
                   } else {//跳转到首页
+                    // 选择学校
                     wx.reLaunch({
                       url: '/pages/index/index'
                     })

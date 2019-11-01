@@ -8,6 +8,7 @@ use app\routine\model\routine\RoutineCode;
 use app\routine\model\routine\RoutineFormId;
 use app\routine\model\routine\RoutineTemplate;
 use app\routine\model\store\StoreCombination;
+use app\routine\model\user\School;
 use service\JsonService;
 use service\GroupDataService;
 use service\MiniProgramService;
@@ -61,7 +62,40 @@ use think\Model;
  */
 class AuthApi extends AuthController{
 
+    //============学校选择 开始=================
+    /**
+     * 学校列表
+     * @return \think\response\Json
+     */
+    public function get_school(){
+        $data = School::getSchool('name,location');
+        return JsonService::successful($data);
+    }
+    public function get_home(){
+        $data = School::getHome('name,location');
+        return JsonService::successful($data);
+    }
 
+    //判断是否选择学校
+    public function is_choose(){
+        $uid_choose = User::isChoose($this->userInfo['uid']);
+        return JsonService::successful($uid_choose);
+    }
+
+    //选择学校
+    public function choose_school(Request $request){
+        $uid = $this->userInfo['uid'];
+        $data = $request->param('school_name');
+        if(!$data) return Json::fail('请选择学校/小区名称');
+        $is = User::chooseOne($uid, $data);
+        if($is){
+            return JsonService::successful($is);
+        }else{
+            return JsonService::fail('选择失败!');
+        }
+    }
+
+    //============学校选择 结束=================
     //============分类回收 开始=================
     /**
      * get回收价格
@@ -199,11 +233,11 @@ class AuthApi extends AuthController{
         $banner = GroupDataService::getData('routine_home_banner')?:[];//banner图 轮播
         $menus = GroupDataService::getData('routine_home_menus')?:[];//banner图  五个的导航
         $lovely = GroupDataService::getData('routine_lovely')?:[];//猜你喜欢图
-        $best = StoreProduct::getBestProduct('id,image,store_name,cate_id,price,unit_name,sort',8);//精品推荐
+        $best = StoreProduct::getBestProduct('id,image,store_name,cate_id,price,unit_name,sort',5);//精品推荐
         $new = StoreProduct::getNewProduct('id,image,store_name,cate_id,price,unit_name,sort',3);//首发
-        $hot = StoreProduct::getHotProduct('id,image,store_name,cate_id,price,unit_name,sort',8);//热卖
+        $hot = StoreProduct::getHotProduct('id,image,store_name,cate_id,price,unit_name,sort',5);//热卖
         $benefit = StoreProduct::getBenefitProduct('id,image,store_name,cate_id,price,ot_price,stock,unit_name,sort',3);//促销
-        $like = StoreProduct::getHotProduct('id,image,store_name,cate_id,price,unit_name,sort',6);//猜你喜欢
+        $like = StoreProduct::getHotProduct('id,image,store_name,cate_id,price,unit_name,sort',4);//猜你喜欢
         $data['banner'] = $banner;
         $data['lovely'] = $lovely[0];
         $data['menus'] = $menus;

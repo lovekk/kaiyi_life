@@ -1,10 +1,38 @@
 
 <view class="nav">
-    <view class="{{style[0]}}" bind:tap="tabFun" data-id="{{0}}">学生用户</view>
+    <view class="{{style[0]}}" data-id="{{0}}" bind:tap="tabFun">学生用户</view>
     <view class="{{style[1]}}" data-id="{{1}}" bind:tap="tabFun">小区用户</view>
 </view>
 
 <view class="cnt">
-    <view hidden="{{show[0]}}">我就是内容1</view>
-    <view hidden="{{show[1]}}">我就是内容2</view>
+    <view hidden="{{show[0]}}">
+        <!-- 我就是内容1 -->
+        <view class='exten-item'>
+            <block wx:for="{{schoolinfo}}" wx:for-index="idx" wx:for-item="itemName">
+                <view class='exten-list flex' data-name="{{itemName.name}}" bind:tap="chooseOne">
+                    <view>
+                        <text class='exten-bg2 exten-bg'></text>
+                        {{itemName.name}}
+                    </view>
+                    <view class='exten-money'>{{itemName.location}}</view>
+                </view>
+            </block>
+        </view>
+        <view class="tishi">注：若无您所在的学校，请选择凯易校园。</view>
+    </view>
+    <view hidden="{{show[1]}}">
+        <!-- 我就是内容2 -->
+        <view class='exten-item'>
+            <block wx:for="{{homeinfo}}" wx:for-index="idx" wx:for-item="itemName">
+                <view class='exten-list flex'  data-name="{{itemName.name}}" bind:tap="chooseOne">
+                    <view>
+                        <text class='exten-bg2 exten-bg'></text>
+                        {{itemName.name}}
+                    </view>
+                    <view class='exten-money'>{{itemName.location}}</view>
+                </view>
+            </block>
+        </view>
+        <view class="tishi">注：若无您所在的小区，请选择凯易小区。</view>
+    </view>
 </view>

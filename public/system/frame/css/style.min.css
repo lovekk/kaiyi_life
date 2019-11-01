@@ -1370,7 +1370,7 @@ body.skin-3{background:#3e2c42}
 .login-logo{font-family:"Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif;color:#fff;overflow:hidden;margin-top:1vh}
 .login-logo img{width:90px}
 .login-logo p{color:#fff;font-weight:300;margin:0}
-.login-bg{background-image:url(../../images/bg-logo.jpg)}
+.login-bg{background-image:url(../../images/login-bg.jpg)}
 .imgbox{width:100%}
 @media screen and (min-width:320px) and (max-width:639px){.J_menuTabs,.J_tabLeft,.J_tabRight{display:none}
     body.fixed-sidebar.mini-navbar .navbar-static-side{width:0}

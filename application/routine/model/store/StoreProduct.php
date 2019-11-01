@@ -84,7 +84,7 @@ class StoreProduct extends ModelBasic
     public static function getBestProduct($field = '*',$limit = 0)
     {
         $model = self::where('is_best',1)->where('is_del',0)->where('mer_id',0)
-            ->where('stock','>',0)->where('is_show',1)->field($field)
+            ->where('stock','>',0)->where('is_show',1)->where('school_name',)->field($field)
             ->order('sort DESC, id DESC');
         if($limit) $model->limit($limit);
         return $model->select();

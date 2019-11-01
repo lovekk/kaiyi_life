@@ -1,8 +1,8 @@
 <?php
 /**
  *
- * @author: xaboy<365615158@qq.com>
- * @day: 2017/11/11
+ * @author: zk
+ * @day: 2019/10/11
  */
 
 namespace app\admin\model\system;
@@ -23,5 +23,12 @@ class School extends ModelBasic
         if($params['keyword'] !== '') $model = $model->where('name|type','LIKE',"%$params[keyword]%");
         $model = $model->order('sort DESC,id DESC');
         return self::page($model,$params);
+    }
+
+    public static function getSchool(){
+        $model = self::where('is_show',1)
+            ->order('sort','desc')
+            ->select();
+        return $model;
     }
 }

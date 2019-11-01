@@ -25,6 +25,7 @@ Page({
     likeList:[],
     offset: 0,
     title: "玩命加载中...",
+    school_name: "定位",
     hidden: false
   },
   goUrl:function(e){
@@ -45,6 +46,9 @@ Page({
   onLoad: function (options) {
     app.setBarColor();
     var that = this;
+    var header = {
+      'content-type': 'application/x-www-form-urlencoded',
+    };
     if (app.globalData.config !=null){
       wx.setNavigationBarTitle({
         title: app.globalData.config.routine_name,
@@ -54,6 +58,37 @@ Page({
         title: '商城首页',
       })
     }
+    // 选择学校
+    wx.request({
+      url: app.globalData.url + '/routine/auth_api/is_choose?uid=' + app.globalData.uid,
+      method: 'POST',
+      header: header,
+      success: function (res) {
+        console.log(res);
+        if(res.data.msg == null){
+          //关闭所有页面，打开到应用内的某个页面
+          wx.reLaunch({
+            url: '/pages/tab/tab'
+          })
+        }else{
+          that.setData({
+            school_name: res.data.msg,
+          })
+        }
+      },
+      fail: function (res) {
+        console.log('submit fail');
+        wx.showToast({
+          title: '程序出现错误',
+          icon: 'success',
+          duration: 2000
+        })
+      },
+      complete: function (res) {
+        console.log('submit complete');
+      }
+    })
+
     
     // if (options.spid){
     //   app.globalData.spid = options.spid;
