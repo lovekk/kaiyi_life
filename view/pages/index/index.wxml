@@ -4,14 +4,14 @@
 <!-- 跳转没有回退的  尽量少用 -->
 <!-- <navigator url="/pages/scroll/scroll" open-type="redirectTo">跳转没有回退的</navigator> -->
 <!-- 定位 -->
-<navigator class='flex' hover-class="none" url='/pages/tab/tab'>  
+<!-- <navigator class='flex' hover-class="none" url='/pages/tab/tab'>   -->
   <view class='new-product-loc'>
     <view class='title-bar-loc'>
       <view class='iconfont icon-dizhi1'></view>
       <text>{{school_name}}</text>
     </view>
   </view>
-</navigator>
+<!-- </navigator> -->
 <!--轮播图-->
 <view class='swiper_banner'>
   <swiper class="swiper-box" style="height:400rpx" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActivecolor}}">

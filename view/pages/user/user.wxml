@@ -83,7 +83,7 @@
       <view class='item'>
         <navigator hover-class="none" url="/pages/recycle-card/recycle-card">
           <view class='iconfont icon-erweima1 icon-er'></view>
-          <view class='text'>凯易币码</view>
+          <view class='text'>凯易码</view>
         </navigator>
       </view>
       <view class='item'>
@@ -92,10 +92,16 @@
           <view class='text'>地址管理</view>
         </navigator>
       </view>
-      <view class='item'>
+      <!-- <view class='item'>
         <navigator hover-class="none" url="/pages/sign/sign">
           <view class='iconfont icon-wodejifen'></view>
           <view class='text'>用户信息</view>
+        </navigator>
+      </view> -->
+      <view class='item' bindtap='coupons'>
+        <navigator hover-class="none">
+          <view class='iconfont icon-youhuijuan'></view>
+          <view class='text'>优惠劵</view>
         </navigator>
       </view>
       <view class='item' bindtap='extension' wx:if="{{userinfo.is_promoter && userinfo.statu == 1}}">

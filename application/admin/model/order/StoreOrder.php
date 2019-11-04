@@ -50,7 +50,7 @@ class StoreOrder extends ModelBasic
     }
 
     public static function OrderList($where){
-        $model = self::getOrderWhere($where,self::alias('a')->join('user r','r.uid=a.uid','LEFT'),'a.','r')->field('a.*,r.nickname');
+        $model = self::getOrderWhere($where,self::alias('a')->join('user r','r.uid=a.uid','LEFT'),'a.','r')->field('a.*,r.nickname,r.school_name');
         if($where['order']!=''){
             $model = $model->order(self::setOrder($where['order']));
         }else{
@@ -797,36 +797,36 @@ HTML;
 
     public static function getOrderBadge($where){
         return [
-            [
-                'name'=>'拼团订单数量',
-                'field'=>'个',
-                'count'=>self::setEchatWhere($where,2)->count(),
-                'content'=>'拼团总订单数量',
-                'background_color'=>'layui-bg-cyan',
-                'sum'=>self::setEchatWhere($where,2,true)->count(),
-                'class'=>'fa fa-line-chart',
-                'col'=>2
-            ],
-            [
-                'name'=>'砍价订单数量',
-                'field'=>'个',
-                'count'=>self::setEchatWhere($where,4)->count(),
-                'content'=>'砍价总订单数量',
-                'background_color'=>'layui-bg-cyan',
-                'sum'=>self::setEchatWhere($where,4,true)->count(),
-                'class'=>'fa fa-line-chart',
-                'col'=>2
-            ],
-            [
-                'name'=>'秒杀订单数量',
-                'field'=>'个',
-                'count'=>self::setEchatWhere($where,3)->count(),
-                'content'=>'秒杀总订单数量',
-                'background_color'=>'layui-bg-cyan',
-                'sum'=>self::setEchatWhere($where,3,true)->count(),
-                'class'=>'fa fa-line-chart',
-                'col'=>2
-            ],
+//            [
+//                'name'=>'拼团订单数量',
+//                'field'=>'个',
+//                'count'=>self::setEchatWhere($where,2)->count(),
+//                'content'=>'拼团总订单数量',
+//                'background_color'=>'layui-bg-cyan',
+//                'sum'=>self::setEchatWhere($where,2,true)->count(),
+//                'class'=>'fa fa-line-chart',
+//                'col'=>2
+//            ],
+//            [
+//                'name'=>'砍价订单数量',
+//                'field'=>'个',
+//                'count'=>self::setEchatWhere($where,4)->count(),
+//                'content'=>'砍价总订单数量',
+//                'background_color'=>'layui-bg-cyan',
+//                'sum'=>self::setEchatWhere($where,4,true)->count(),
+//                'class'=>'fa fa-line-chart',
+//                'col'=>2
+//            ],
+//            [
+//                'name'=>'秒杀订单数量',
+//                'field'=>'个',
+//                'count'=>self::setEchatWhere($where,3)->count(),
+//                'content'=>'秒杀总订单数量',
+//                'background_color'=>'layui-bg-cyan',
+//                'sum'=>self::setEchatWhere($where,3,true)->count(),
+//                'class'=>'fa fa-line-chart',
+//                'col'=>2
+//            ],
             [
                 'name'=>'普通订单数量',
                 'field'=>'个',

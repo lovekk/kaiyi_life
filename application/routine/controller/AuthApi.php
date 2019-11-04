@@ -3,7 +3,7 @@ namespace app\routine\controller;
 
 use Api\Express;
 use app\routine\model\recycle\Price;
-use app\routine\model\recycle\RecycleAppointment;
+use app\routine\model\recycle\Appointment;
 use app\routine\model\routine\RoutineCode;
 use app\routine\model\routine\RoutineFormId;
 use app\routine\model\routine\RoutineTemplate;
@@ -127,9 +127,10 @@ class AuthApi extends AuthController{
         ],$request);
         $recycleInfo['uid'] = $this->userInfo['uid'];
         $recycleInfo['nickname'] = $this->userInfo['nickname'];
+        $recycleInfo['school_name'] = $this->userInfo['school_name'];
         $recycleInfo['add_time'] = time();
 
-        if($rec = RecycleAppointment::set($recycleInfo)){
+        if($rec = Appointment::set($recycleInfo)){
             return JsonService::successful($rec);
         }else
             return JsonService::fail('添加回收预约失败!');
@@ -141,16 +142,17 @@ class AuthApi extends AuthController{
      * @return \think\response\Json
      */
     public function get_recycle_order(){
-        $data = RecycleAppointment::getRecycleOrder('uid,phone,area,fulladdress,appdate,apptime,remark,status,add_time',$this->userInfo['uid']);
+        $data = Appointment::getRecycleOrder('uid,phone,area,fulladdress,appdate,apptime,remark,status,add_time',$this->userInfo['uid']);
         return JsonService::successful($data);
     }
 
+
     /**
-     * 转账
+     * 转账 积分
      * @param int $price
      * @return \think\response\Json
      */
-    public function user_recycle_pay()
+    public function move_integral()
     {
         /**
          * 1.查询uid的钱，user_id的钱
@@ -169,6 +171,62 @@ class AuthApi extends AuthController{
             ['price',''],
         ],$request);
 
+        // 得到参数
+        $price = $payInfo['price'];
+        $to_uid = $payInfo['to_uid'];
+        $to_name = $payInfo['to_name'];
+
+        //0.判断传参数据
+        if(!$price || $price<=0) return JsonService::fail('转账积分错误');
+        if(!$to_uid || $to_uid<=0) return JsonService::fail('用户参数错误');
+
+        //1.查询uid的钱，user_id的钱
+        $uid_money = User::getUserIntegral($this->userInfo['uid']);
+
+        $n_money = $uid_money - $price;
+        $mark = '转账'.$price.'积分';
+        //2.判断uid的钱够不
+        //够用
+        if ($n_money >= 0){
+//------------------------------------------------------------------到这看-------------------------------------------------------------------
+            //3.user表两个更新  uid-price  +price
+            //4.user_bill表两个记录  转入  转出to_uid
+            $add_time = time();
+
+            //$uid, $link_id,$title, $category, $type, $number, $balance, $mark, $status
+            return UserBill::changeIntegral($this->userInfo['uid'], '0','转账积分','integral','move_integral',$price,$n_money,$mark,1, $to_uid);
+        }else{
+            return JsonService::fail('积分余额不足');
+        }
+
+    }
+
+
+    /**
+     * 转账 凯易币
+     * @param int $price
+     * @return \think\response\Json
+     */
+    public function move_money()
+    {
+        /**
+         * 1.查询uid的钱，user_id的钱
+         * 2.判断uid的钱够不
+         * 3.user表两个更新  uid-price  user_id+price
+         * 4.user_bill表两个记录  转入  转出
+         * 5.完成
+         */
+
+        //传参
+        $request = Request::instance();
+        if(!$request->isPost()) return JsonService::fail('参数错误!');
+        $payInfo = UtilService::postMore([
+            ['to_uid',''],
+            ['to_name',''],
+            ['price',''],
+        ],$request);
+
+        // 得到参数
         $price = $payInfo['price'];
         $to_uid = $payInfo['to_uid'];
         $to_name = $payInfo['to_name'];
@@ -183,13 +241,15 @@ class AuthApi extends AuthController{
         $n_money = $uid_money - $price;
         $mark = '转账'.$price.'凯易币';
         //2.判断uid的钱够不
+        //够用
         if ($n_money >= 0){
+//------------------------------------------------------------------到这看-------------------------------------------------------------------
+            //3.user表两个更新  uid-price  +price
+            //4.user_bill表两个记录  转入  转出to_uid
+            $add_time = time();
 
-            //3.user表两个更新  uid-price  user_id+price
-            //4.user_bill表两个记录  转入  转出
-
-            //$uid, $title, $category, $type, $number, $link_id=0, $balance=0, $mark='', $status=1, $user_id, $user_name
-            return UserBill::changeMoney($this->userInfo['uid'], '转账','now_money','transfer',$price,'0',$n_money,$mark,1,$to_uid,$to_name);
+            //$uid, $link_id,$title, $category, $type, $number, $balance, $mark, $status
+            return UserBill::changeMoney($this->userInfo['uid'], '0','转账凯易币','now_money','move_money',$price,$n_money,$mark,1, $to_uid);
         }else{
             return JsonService::fail('余额不足');
         }
@@ -233,11 +293,11 @@ class AuthApi extends AuthController{
         $banner = GroupDataService::getData('routine_home_banner')?:[];//banner图 轮播
         $menus = GroupDataService::getData('routine_home_menus')?:[];//banner图  五个的导航
         $lovely = GroupDataService::getData('routine_lovely')?:[];//猜你喜欢图
-        $best = StoreProduct::getBestProduct('id,image,store_name,cate_id,price,unit_name,sort',5);//精品推荐
-        $new = StoreProduct::getNewProduct('id,image,store_name,cate_id,price,unit_name,sort',3);//首发
-        $hot = StoreProduct::getHotProduct('id,image,store_name,cate_id,price,unit_name,sort',5);//热卖
-        $benefit = StoreProduct::getBenefitProduct('id,image,store_name,cate_id,price,ot_price,stock,unit_name,sort',3);//促销
-        $like = StoreProduct::getHotProduct('id,image,store_name,cate_id,price,unit_name,sort',4);//猜你喜欢
+        $best = StoreProduct::getBestProduct('id,image,store_name,cate_id,price,unit_name,sort',5,$this->userInfo['school_name']);//精品推荐
+        $new = StoreProduct::getNewProduct('id,image,store_name,cate_id,price,unit_name,sort',3,$this->userInfo['school_name']);//首发
+        $hot = StoreProduct::getHotProduct('id,image,store_name,cate_id,price,unit_name,sort',5,$this->userInfo['school_name']);//热卖
+        $benefit = StoreProduct::getBenefitProduct('id,image,store_name,cate_id,price,ot_price,stock,unit_name,sort',3,$this->userInfo['school_name']);//促销
+        $like = StoreProduct::getHotProduct('id,image,store_name,cate_id,price,unit_name,sort',4,$this->userInfo['school_name']);//猜你喜欢
         $data['banner'] = $banner;
         $data['lovely'] = $lovely[0];
         $data['menus'] = $menus;
@@ -267,7 +327,8 @@ class AuthApi extends AuthController{
         $model = StoreProduct::validWhere();
         if($_GET){$data = $_GET['value'];
             if($data!=''){
-                $model = $model->where('store_name','LIKE',"%$data%")->whereOr('keyword','LIKE',"%$data%");
+                $model = $model->where('school_name',$this->userInfo['school_name'])
+                    ->where('store_name','LIKE',"%$data%")->whereOr('keyword','LIKE',"%$data%");
                 if((int)$data) $model = $model->whereOr('id',$data);
             }
             $list = $model->field('id,store_name,cate_id,image,sales,price,stock')->select()->toArray();
@@ -378,7 +439,7 @@ class AuthApi extends AuthController{
         if($salesOrder) $baseOrder = $salesOrder == 'desc' ? 'ficti DESC' : 'ficti ASC';//虚拟销量
         if($baseOrder) $baseOrder .= ', ';
         $model->order($baseOrder.'sort DESC, add_time DESC');
-        $list = $model->limit($first,$limit)->field('id,store_name,cate_id,image,sales,ficti,price,stock')->select()->toArray();
+        $list = $model->where('school_name',$this->userInfo['school_name'])->limit($first,$limit)->field('id,store_name,cate_id,image,sales,ficti,price,stock')->select()->toArray();
         return JsonService::successful($list);
     }
     /**

@@ -1,9 +1,33 @@
-<form bindsubmit='submitSub' report-submit='true'>
-  <view class="pay-bg">
-      <view class='title'>转账-凯易币给：{{to_name}}</view>
-      <view class='title'>输入金额</view>
-      <view class='input flex'><text>￥</text><input type='digit' placeholder='0.00' placeholder-class='placeholder' name='number'></input></view>
-      <view class='tip'>提示：当前凯易币余额为 <text>￥{{userinfo.now_money}}</text></view>
-      <button class='but' form-type='submit'>立即转账</button>
-  </view>
-</form>
+<view class="nav">
+    <view class="{{style[0]}}" data-id="{{0}}" bind:tap="tabFun">转凯易币</view>
+    <view class="{{style[1]}}" data-id="{{1}}" bind:tap="tabFun">转积分</view>
+</view>
+
+<view class="cnt">
+    <view hidden="{{show[0]}}">
+        <!-- 我就是内容1 -->
+          <form bindsubmit='submitSubM' report-submit='true'>
+            <view class="pay-bg">
+                <view class='title'>转账-凯易币给：{{to_name}}</view>
+                <view class='title'>输入金额</view>
+                <view class='input flex'><text>￥</text><input type='digit' placeholder='0.00' placeholder-class='placeholder' name='number'></input></view>
+                <view class='tip'>提示：当前凯易币余额为 <text>￥{{userinfo.now_money}}</text></view>
+                <button class='but' form-type='submit'>立即转账</button>
+            </view>
+          </form>
+    </view>
+    <view hidden="{{show[1]}}">
+        <!-- 我就是内容2 -->
+          <form bindsubmit='submitSubJ' report-submit='true'>
+            <view class="pay-bg">
+                <view class='title'>转账-积分给：{{to_name}}</view>
+                <view class='title'>输入积分</view>
+                <view class='input flex'><text>￥</text><input type='digit' placeholder='0.00' placeholder-class='placeholder' name='jifen'></input></view>
+                <view class='tip'>提示：当前积分为 <text>￥{{userinfo.integral}}</text></view>
+                <button class='but' form-type='submit'>立即转账</button>
+            </view>
+          </form>
+    </view>
+</view>
+
+

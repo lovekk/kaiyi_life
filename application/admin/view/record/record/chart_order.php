@@ -116,9 +116,9 @@
                 typeList:[
                     {name:'全部',value:''},
                     {name:'普通',value:1},
-                    {name:'拼团',value:2},
-                    {name:'砍价',value:3},
-                    {name:'秒杀',value:4},
+//                    {name:'拼团',value:2},
+//                    {name:'砍价',value:3},
+//                    {name:'秒杀',value:4},
                 ],
                 status:'',
                 type:'',

@@ -10,11 +10,11 @@ namespace app\routine\model\recycle;
 use basic\ModelBasic;
 use traits\ModelTrait;
 
-class RecycleAppointment extends ModelBasic
+class Appointment extends ModelBasic
 {
     use ModelTrait;
 
-    // 价格接口
+    // 回收预约
     public static function getRecycleOrder($field = '*',$uid)
     {
         $model = self::where('uid',$uid)->field($field)->select();

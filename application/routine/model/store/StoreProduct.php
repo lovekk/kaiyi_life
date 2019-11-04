@@ -36,10 +36,10 @@ class StoreProduct extends ModelBasic
      * @param int $limit
      * @return false|\PDOStatement|string|\think\Collection
      */
-    public static function getNewProduct($field = '*',$limit = 0)
+    public static function getNewProduct($field = '*',$limit = 0,$school_name)
     {
         $model = self::where('is_new',1)->where('is_del',0)->where('mer_id',0)
-            ->where('stock','>',0)->where('is_show',1)->field($field)
+            ->where('stock','>',0)->where('is_show',1)->where('school_name',$school_name)->field($field)
             ->order('sort DESC, id DESC');
         if($limit) $model->limit($limit);
         return $model->select();
@@ -51,10 +51,10 @@ class StoreProduct extends ModelBasic
      * @param int $limit
      * @return false|\PDOStatement|string|\think\Collection
      */
-    public static function getHotProduct($field = '*',$limit = 0)
+    public static function getHotProduct($field = '*',$limit = 0,$school_name)
     {
         $model = self::where('is_hot',1)->where('is_del',0)->where('mer_id',0)
-            ->where('stock','>',0)->where('is_show',1)->field($field)
+            ->where('stock','>',0)->where('is_show',1)->where('school_name',$school_name)->field($field)
             ->order('sort DESC, id DESC');
         if($limit) $model->limit($limit);
         return $model->select();
@@ -81,10 +81,10 @@ class StoreProduct extends ModelBasic
      * @param int $limit
      * @return false|\PDOStatement|string|\think\Collection
      */
-    public static function getBestProduct($field = '*',$limit = 0)
+    public static function getBestProduct($field = '*',$limit = 0,$school_name)
     {
         $model = self::where('is_best',1)->where('is_del',0)->where('mer_id',0)
-            ->where('stock','>',0)->where('is_show',1)->where('school_name',)->field($field)
+            ->where('stock','>',0)->where('is_show',1)->where('school_name',$school_name)->field($field)
             ->order('sort DESC, id DESC');
         if($limit) $model->limit($limit);
         return $model->select();
@@ -97,11 +97,11 @@ class StoreProduct extends ModelBasic
      * @param int $limit
      * @return false|\PDOStatement|string|\think\Collection
      */
-    public static function getBenefitProduct($field = '*',$limit = 0)
+    public static function getBenefitProduct($field = '*',$limit = 0,$school_name)
     {
         $model = self::where('is_benefit',1)
             ->where('is_del',0)->where('mer_id',0)->where('stock','>',0)
-            ->where('is_show',1)->field($field)
+            ->where('is_show',1)->where('school_name',$school_name)->field($field)
             ->order('sort DESC, id DESC');
         if($limit) $model->limit($limit);
         return $model->select();

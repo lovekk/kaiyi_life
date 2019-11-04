@@ -39,34 +39,58 @@ class UserBill extends ModelBasic
 
 
     // 二维码转账 转入
-    public static function codeincome($uid, $title, $category, $type, $number, $link_id=0, $balance=0, $mark='', $status=1, $user_id, $user_name)
+    public static function codeincome($user_id, $link_id, $title, $category, $type, $number, $balance, $mark, $status, $uid)
     {
         //0 = 支出 1 = 获得
         $pm = 1;
         $add_time=time();
         // 创建一个包含变量名和它们的值的数组
-        return self::set(compact('title','uid','link_id','category','type','number','balance','mark','status','pm','user_id','user_name'));
+        return self::set(compact('uid','link_id','title','category','type','number','balance','mark','status','pm','add_time'));
     }
     // 二维码转账 转出
-    public static function codeout($uid, $title, $category, $type, $number, $link_id=0, $balance=0, $mark='', $status=1, $user_id, $user_name)
+    public static function codeout($uid, $link_id, $title, $category, $type, $number,  $balance, $mark, $status, $user_id)
     {
         $pm = 0;
         $add_time=time();
-        return self::set(compact('title','uid','link_id','category','type','number','balance','mark','status','pm','user_id','user_name'));
+        return self::set(compact('uid','link_id','title','category','type','number','balance','mark','status','pm','add_time'));
     }
 
+
+    // 凯易币
     // 做改变 2个改值 2个入库
-    public static function changeMoney($uid, $title, $category, $type, $number, $link_id=0, $balance=0, $mark='', $status=1, $user_id, $user_name){
+    public static function changeMoney($uid, $link_id,$title, $category, $type, $number, $balance, $mark, $status,$to_uid){
 
         self::beginTrans();
-        $res1 = self::codeout($uid, $title, $category, $type, $number, $link_id=0, $balance=0, $mark='', $status=1, $user_id, $user_name);
-        $res2 = self::codeincome($uid, $title, $category, $type, $number, $link_id=0, $balance=0, $mark='', $status=1, $user_id, $user_name);
-        $res3 = User::changeUserMoney($user_id,$number,1);//转入
+        $res1 = self::codeout($uid, $link_id, $title, $category, $type, $number,  $balance, $mark, $status,$to_uid);
+
+        $res2 = self::codeincome($uid, $link_id,$title, $category, $type, $number,  $balance, $mark, $status,$to_uid);
+
+        $res3 = User::changeUserMoney($to_uid,$number,1);//转入
+
         $res4 = User::changeUserMoney($uid,$number,2);//转出
         $res = $res1 && $res2 && $res3 && $res4;
         self::checkTrans($res);
         return $res;
     }
+
+
+    // 积分
+    // 做改变 2个改值 2个入库
+    public static function changeIntegral($uid, $link_id,$title, $category, $type, $number, $balance, $mark, $status,$to_uid){
+
+        self::beginTrans();
+        $res1 = self::codeout($uid, $link_id, $title, $category, $type, $number,  $balance, $mark, $status,$to_uid);
+
+        $res2 = self::codeincome($uid, $link_id,$title, $category, $type, $number,  $balance, $mark, $status,$to_uid);
+
+        $res3 = User::changeUserIntegral($to_uid,$number,1);//转入
+
+        $res4 = User::changeUserIntegral($uid,$number,2);//转出
+        $res = $res1 && $res2 && $res3 && $res4;
+        self::checkTrans($res);
+        return $res;
+    }
+
 
 
 

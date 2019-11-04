@@ -23,11 +23,13 @@
               <view class='main-number'>时间：{{item.appdate}} {{item.apptime}}</view>
               <view class='main-number'>地点：{{item.fulladdress}}</view>
               <view class='main-number'>备注：{{item.remark}}</view>
-              <view class='main-time'>{{item.add_time}}</view>
+              <!-- <view class='main-number'>区域：{{item.school_name}}</view> -->
+         
           </view>
           <!-- 状态1预约2完成3已转账 -->
-          <view class='item-money money-app' wx:if="{{item.status==1}}">已预约</view>
-           <view class='item-money money-suc' wx:else>已完成</view>
+          <view class='item-money money-suc' wx:if="{{item.status==3}}">已转账</view>
+           <view class='item-money money-suc' wx:elif="{{item.status==2}}">已回收</view>
+           <view class='item-money money-app' wx:else>已预约</view>
       </view>
    </block>
 </view>

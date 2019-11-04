@@ -32,45 +32,6 @@ class Appointment extends AuthController
 
 
     /**
-     * 显示创建资源表单页.
-     * @return \think\Response
-     */
-    public function create($cid = 0)
-    {
-        $formbuider = [
-            Form::input('name','物品名称')->required('物品名称必填'),
-            Form::number('money','价格',0)->required('价格必填'),
-            Form::input('unit','单位[例:元/公斤2]')->required('单位必填'),
-            Form::number('sort','排序',0),
-        ];
-        $form = Form::make_post_form('添加回收物品',$formbuider,Url::build('save'),2);
-        $this->assign(compact('form'));
-        return $this->fetch('public/form-builder');
-    }
-
-
-    /**
-     * 保存新建的资源
-     * @param  \think\Request  $request
-     * @return \think\Response
-     */
-    public function save(Request $request)
-    {
-        $data = Util::postMore([
-            'name',
-            'money',
-            'unit',
-            'sort',
-        ],$request);
-        if(!$data['name']) return Json::fail('请输入物品名称');
-        if(!$data['money']) return Json::fail('请输入价格');
-        if(!$data['unit']) return Json::fail('请输入单位');
-        AppointmentModel::set($data);
-        return Json::successful('添加回收物品成功!');
-    }
-
-
-    /**
      * 显示编辑资源表单页.
      *
      * @param  int  $id
@@ -81,13 +42,13 @@ class Appointment extends AuthController
         $menu = AppointmentModel::get($id);
         if(!$menu) return Json::fail('数据不存在!');
         $formbuider = [
-            Form::input('name','物品名称',$menu['name']),
-            Form::number('money','价格',$menu['money']),
-            Form::input('unit','单位[例:元/公斤，毛/个]',$menu['unit']),
-            Form::number('sort','排序',$menu['sort']),
-
+            Form::input('nickname','用户名',$menu['nickname']),
+            Form::input('area','用户地址',$menu['area']),
+            Form::input('fulladdress','详细地址',$menu['fulladdress']),
+            // 状态1预约2完成3已转账
+            Form::radio('status','状态',$menu['status'])->options([['value'=>1,'label'=>'预约'],['value'=>2,'label'=>'已回收'],['value'=>3,'label'=>'已转账']])
         ];
-        $form = Form::make_post_form('添加回收物品',$formbuider,Url::build('update',array('id'=>$id)),2);
+        $form = Form::make_post_form('回收预约',$formbuider,Url::build('update',array('id'=>$id)),2);
         $this->assign(compact('form'));
         return $this->fetch('public/form-builder');
     }
@@ -103,14 +64,15 @@ class Appointment extends AuthController
     public function update(Request $request, $id)
     {
         $data = Util::postMore([
-            'name',
-            'money',
-            'unit',
-            'sort',
+            'nickname',
+            'area',
+            'fulladdress',
+            ['status',1]
         ],$request);
-        if(!$data['name']) return Json::fail('请输入物品名称');
-        if(!$data['money']) return Json::fail('请输入价格');
-        if(!$data['unit']) return Json::fail('请输入单位');
+        if(!$data['nickname']) return Json::fail('请输入用户名');
+        if(!$data['area']) return Json::fail('请输入用户地址');
+        if(!$data['fulladdress']) return Json::fail('请输入详细地址');
+        if(!$data['status']) return Json::fail('请输入状态');
         if(!AppointmentModel::get($id)) return Json::fail('编辑的记录不存在!');
         AppointmentModel::edit($data,$id);
         return Json::successful('修改成功!');

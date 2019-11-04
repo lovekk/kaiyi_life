@@ -88,7 +88,7 @@
                     </script>
                     <!--用户信息-->
                     <script type="text/html" id="userinfo">
-                        {{d.nickname==null ? '暂无信息':d.nickname}}/{{d.uid}}
+                        {{d.nickname==null ? '暂无信息':d.nickname}}/{{d.uid}}<br/>[{{d.school_name}}]
                     </script>
                     <!--支付状态-->
                     <script type="text/html" id="paid">
@@ -355,6 +355,7 @@
         return [
             {field: 'order_id', title: '订单号', sort: true,event:'order_id',width:'14%',templet:'#order_id'},
             {field: 'nickname', title: '用户信息',templet:'#userinfo',width:'10%'},
+//            {field: 'school_name', title: '区域',templet:'#school_name',width:'10%'},
             {field: 'info', title: '商品信息',templet:"#info"},
             {field: 'pay_price', title: '实际支付',width:'8%'},
             {field: 'paid', title: '支付状态',templet:'#paid',width:'8%'},
@@ -444,9 +445,9 @@
                 orderType: [
                     {name: '全部', value: ''},
                     {name: '普通订单', value: 1,count:orderCount.general},
-                    {name: '拼团订单', value: 2,count:orderCount.pink},
-                    {name: '秒杀订单', value: 3,count:orderCount.seckill},
-                    {name: '砍价订单', value: 4,count:orderCount.bargain},
+//                    {name: '拼团订单', value: 2,count:orderCount.pink},
+//                    {name: '秒杀订单', value: 3,count:orderCount.seckill},
+//                    {name: '砍价订单', value: 4,count:orderCount.bargain},
                 ],
                 orderStatus: [
                     {name: '全部', value: ''},

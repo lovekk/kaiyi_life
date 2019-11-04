@@ -70,7 +70,7 @@
                             <div class="layui-input-inline">
                                 <select name="user_type" lay-verify="user_type">
                                     <option value="">全部</option>
-                                    <option value="wechat">微信公众号</option>
+<!--                                    <option value="wechat">微信公众号</option>-->
                                     <option value="routine">微信小程序</option>
                                 </select>
                             </div>
@@ -185,10 +185,10 @@
                     <div class="layui-btn-group conrelTable">
 <!--                        <button class="layui-btn layui-btn-sm layui-btn-danger" type="button" data-type="set_status_f"><i class="fa fa-ban"></i>封禁</button>-->
 <!--                        <button class="layui-btn layui-btn-sm layui-btn-normal" type="button" data-type="set_status_j"><i class="fa fa-check-circle-o"></i>解封</button>-->
-                        <button class="layui-btn layui-btn-sm layui-btn-normal" type="button" data-type="set_grant"><i class="fa fa-check-circle-o"></i>发送优惠券</button>
-                        <button class="layui-btn layui-btn-sm layui-btn-normal" type="button" data-type="set_custom"><i class="fa fa-check-circle-o"></i>发送客服图文消息</button>
+<!--                        <button class="layui-btn layui-btn-sm layui-btn-normal" type="button" data-type="set_grant"><i class="fa fa-check-circle-o"></i>发送优惠券</button>-->
+<!--                        <button class="layui-btn layui-btn-sm layui-btn-normal" type="button" data-type="set_custom"><i class="fa fa-check-circle-o"></i>发送客服图文消息</button>-->
 <!--                        <button class="layui-btn layui-btn-sm layui-btn-normal" type="button" data-type="set_template"><i class="fa fa-check-circle-o"></i>发送模板消息</button>-->
-                        <button class="layui-btn layui-btn-sm layui-btn-normal" type="button" data-type="set_info"><i class="fa fa-check-circle-o"></i>发送站内消息</button>
+<!--                        <button class="layui-btn layui-btn-sm layui-btn-normal" type="button" data-type="set_info"><i class="fa fa-check-circle-o"></i>发送站内消息</button>-->
                         <button class="layui-btn layui-btn-sm layui-btn-normal" type="button" data-type="refresh"><i class="layui-icon layui-icon-refresh" ></i>刷新</button>
                     </div>
                     <table class="layui-hide" id="userList" lay-filter="userList">
@@ -262,7 +262,7 @@
                 {field: 'integral', title: '积分',width:'6%',sort:true,event:'integral'},
                 {field: 'spread_uid_nickname', title: '推荐人',width:'6%'},
                 {field: 'sex', title: '性别',width:'4%'},
-                {field: 'add_time', title: '首次访问日期',align:'center',width:'12%'},
+                {field: 'school_name', title: '区域',align:'center',width:'12%'},
                 {field: 'last_time', title: '最近访问日期',align:'center',width:'12%'},
                 {field: 'status', title: '状态',templet:"#checkboxstatus",width:'6%'},
                 {field: 'user_type', title: '用户类型',templet:'#user_type',width:'6%'},

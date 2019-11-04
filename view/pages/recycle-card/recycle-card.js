@@ -34,7 +34,7 @@ Page({
           that.setData({
             userinfo: res.data.data
           })
-          console.log(res.data.data);
+
         } else {
           that.setData({
             userinfo: []
@@ -55,7 +55,6 @@ Page({
       wx.scanCode({
         onlyFromCamera: true,
         success (res) {
-          console.log(res.result)
           var str = res.result;
           var arr = str.split("-");
           var to_uid = parseInt(arr[0]);
@@ -67,11 +66,9 @@ Page({
             method: 'POST',
             header: header,
             success: function (res) {
-              console.log(res);
-              console.log(res.data.data);
               if (res.data.code == 200 && res.data.data.nickname == to_name) {
                 wx.navigateTo({ //跳转至指定页面并关闭其他打开的所有页面（这个最好用在返回至首页的的时候）
-                  url: '/pages/recycle-pay/recycle-pay?to_uid=' + to_name + '&to_name=' + to_name
+                  url: '/pages/recycle-pay/recycle-pay?to_uid=' + to_uid + '&to_name=' + to_name
                 })
               } else {
                 wx.showModal({

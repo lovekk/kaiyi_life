@@ -7,3 +7,18 @@
 .pay-bg .tip{font-size:26rpx;color:#888888;text-align:center;padding:0 30rpx;margin-top:25rpx;}
 .pay-bg .tip text{color:#ef4a49;}
 .pay-bg .but{color:#fff;font-size:30rpx;background-color:#ef4a49;width:550rpx;height:86rpx;border-radius:50rpx;margin-top:46rpx;}
+
+.nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 10rpx;
+}
+.nav view{
+    width: 300rpx;
+    height: 80rpx;
+    line-height: 60rpx;
+    text-align: center;
+}
+.now{
+    border-bottom: 3rpx solid red;
+}
