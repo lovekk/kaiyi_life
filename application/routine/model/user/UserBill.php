@@ -38,17 +38,39 @@ class UserBill extends ModelBasic
     }
 
 
-    // 二维码转账 转入
+    // 二维码转账 转入 凯易币
     public static function codeincome($user_id, $link_id, $title, $category, $type, $number, $balance, $mark, $status, $uid)
     {
         //0 = 支出 1 = 获得
         $pm = 1;
         $add_time=time();
+        $balance = $number + User::getUserMoney($uid);
         // 创建一个包含变量名和它们的值的数组
         return self::set(compact('uid','link_id','title','category','type','number','balance','mark','status','pm','add_time'));
     }
-    // 二维码转账 转出
+    // 二维码转账 转出 凯易币
     public static function codeout($uid, $link_id, $title, $category, $type, $number,  $balance, $mark, $status, $user_id)
+    {
+        $pm = 0;
+        $add_time=time();
+        return self::set(compact('uid','link_id','title','category','type','number','balance','mark','status','pm','add_time'));
+    }
+
+
+    // 二维码转账 转入 积分
+    public static function codeincomeJ($user_id, $link_id, $title, $category, $type, $number, $balance, $mark, $status, $uid)
+    {
+        //0 = 支出 1 = 获得
+        $pm = 1;
+        $add_time=time();
+        $balance = $number + User::getUserIntegral($uid);
+        // 创建一个包含变量名和它们的值的数组
+        return self::set(compact('uid','link_id','title','category','type','number','balance','mark','status','pm','add_time'));
+    }
+
+
+    // 二维码转账 转出 积分
+    public static function codeoutJ($uid, $link_id, $title, $category, $type, $number,  $balance, $mark, $status, $user_id)
     {
         $pm = 0;
         $add_time=time();
@@ -79,15 +101,18 @@ class UserBill extends ModelBasic
     public static function changeIntegral($uid, $link_id,$title, $category, $type, $number, $balance, $mark, $status,$to_uid){
 
         self::beginTrans();
-        $res1 = self::codeout($uid, $link_id, $title, $category, $type, $number,  $balance, $mark, $status,$to_uid);
+        $res1 = self::codeoutJ($uid, $link_id, $title, $category, $type, $number,  $balance, $mark, $status,$to_uid);
 
-        $res2 = self::codeincome($uid, $link_id,$title, $category, $type, $number,  $balance, $mark, $status,$to_uid);
+        $res2 = self::codeincomeJ($uid, $link_id,$title, $category, $type, $number,  $balance, $mark, $status,$to_uid);
 
         $res3 = User::changeUserIntegral($to_uid,$number,1);//转入
 
         $res4 = User::changeUserIntegral($uid,$number,2);//转出
+
         $res = $res1 && $res2 && $res3 && $res4;
+
         self::checkTrans($res);
+
         return $res;
     }
 

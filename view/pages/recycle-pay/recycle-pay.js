@@ -12,6 +12,8 @@ Page({
     show:[false,true],
     style:['now','']
   },
+
+
   onLoad: function (options) {
     var header = {
       'content-type': 'application/x-www-form-urlencoded',
@@ -85,7 +87,10 @@ Page({
   submitSubM:function(e){
     var that = this;
     let money = e.detail.value.number;
+    let now_money = that.now_money;
 
+    console.log(money);
+    console.log(that.now_money);
     // 判断金额
     if (!money) {
       wx.showToast({
@@ -96,7 +101,7 @@ Page({
       return false;
     }
     // 判断金额
-    if (that.now_money < money) {
+    if (parseInt(now_money) < parseInt(money)) {
       wx.showToast({
         title: '凯易币余额不足',
         icon: 'none',
@@ -124,10 +129,13 @@ Page({
             duration: 1000,
           })
           setTimeout(function () {
-            wx.navigateTo({
-              // url: '/pages/main/main?now=' + that.data.now_money + '&uid=' + app.globalData.uid,
-              url: '/pages/user/user',
+            wx.switchTab({    //跳转到tabBar页面，并关闭其他所有tabBar页面
+              url:"/pages/user/user"
             })
+            // wx.navigateTo({
+            //   // url: '/pages/main/main?now=' + that.data.now_money + '&uid=' + app.globalData.uid,
+            //   url: '/pages/user/user',
+            // })
           }, 1500)
           
         }else{
@@ -142,66 +150,69 @@ Page({
   },
 
 
-    // 转凯积分
-    submitSubJ:function(e){
-      var that = this;
-      let jifen = e.detail.value.jifen;
-  
-      // 判断积分
-      if (!jifen) {
-        wx.showToast({
-          title: '请输入积分',
-          icon: 'none',
-          duration: 1500,
-        })
-        return false;
-      }
-      // 判断积分
-      if (that.now_jifen < jifen) {
-        wx.showToast({
-          title: '积分余额不足',
-          icon: 'none',
-          duration: 1500,
-        })
-        return false;
-      }
-  
-      // 转账
-      wx.request({
-        //user_wechat_recharge
-        url: app.globalData.url + '/routine/auth_api/move_jifen?uid=' + app.globalData.uid,
-        method: 'POST',
-        data: {
-          to_uid: that.to_uid,
-          to_name:that.to_name,
-          price: e.detail.value.jifen
-        },
-        success: function (res) {
-          console.log(res.data.data);
-          if (res.data.code == 200) {
-            wx.showToast({
-              title: '转账积分成功',
-              icon: 'success',
-              duration: 1000,
-            })
-            setTimeout(function () {
-              wx.navigateTo({
-                // url: '/pages/main/main?now=' + that.data.now_money + '&uid=' + app.globalData.uid,
-                url: '/pages/user/user',
-              })
-            }, 1500)
-            
-          }else{
-            wx.showToast({
-              title: '转账积分失败',
-              icon: 'none',
-              duration: 1000,
-            })
-          }
-        }
+  // 转凯积分
+  submitSubJ:function(e){
+    var that = this;
+    let jifen = e.detail.value.jifen;
+
+    // 判断积分
+    if (!jifen) {
+      wx.showToast({
+        title: '请输入积分',
+        icon: 'none',
+        duration: 1500,
       })
-  
-    },
+      return false;
+    }
+    // 判断积分
+    if (parseInt(that.now_jifen) < parseInt(jifen)) {
+      wx.showToast({
+        title: '积分余额不足',
+        icon: 'none',
+        duration: 1500,
+      })
+      return false;
+    }
+
+    // 转账
+    wx.request({
+      //user_wechat_recharge
+      url: app.globalData.url + '/routine/auth_api/move_integral?uid=' + app.globalData.uid,
+      method: 'POST',
+      data: {
+        to_uid: that.to_uid,
+        to_name:that.to_name,
+        price: e.detail.value.jifen
+      },
+      success: function (res) {
+        console.log(res);
+        if (res.data.code == 200) {
+          wx.showToast({
+            title: '转账积分成功',
+            icon: 'success',
+            duration: 1000,
+          })
+          setTimeout(function () {
+            wx.switchTab({    //跳转到tabBar页面，并关闭其他所有tabBar页面
+              url:"/pages/user/user"
+            })
+            // wx.navigateTo({
+            //   // url: '/pages/main/main?now=' + that.data.now_money + '&uid=' + app.globalData.uid,
+            //   url: '/pages/user/user',
+            // })
+          }, 1500)
+          
+        }else{
+          wx.showToast({
+            title: '转账积分失败',
+            icon: 'none',
+            duration: 1000,
+          })
+        }
+      }
+    })
+
+  },
 
 })
 

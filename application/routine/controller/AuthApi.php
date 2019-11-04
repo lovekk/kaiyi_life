@@ -194,7 +194,8 @@ class AuthApi extends AuthController{
             $add_time = time();
 
             //$uid, $link_id,$title, $category, $type, $number, $balance, $mark, $status
-            return UserBill::changeIntegral($this->userInfo['uid'], '0','转账积分','integral','move_integral',$price,$n_money,$mark,1, $to_uid);
+            $re = UserBill::changeIntegral($this->userInfo['uid'], '0','转账积分','integral','move_integral',$price,$n_money,$mark,1, $to_uid);
+            return JsonService::successful($re);
         }else{
             return JsonService::fail('积分余额不足');
         }
@@ -249,7 +250,8 @@ class AuthApi extends AuthController{
             $add_time = time();
 
             //$uid, $link_id,$title, $category, $type, $number, $balance, $mark, $status
-            return UserBill::changeMoney($this->userInfo['uid'], '0','转账凯易币','now_money','move_money',$price,$n_money,$mark,1, $to_uid);
+            $re = UserBill::changeMoney($this->userInfo['uid'], '0','转账凯易币','now_money','move_money',$price,$n_money,$mark,1, $to_uid);
+            return JsonService::successful($re);
         }else{
             return JsonService::fail('余额不足');
         }
@@ -328,8 +330,8 @@ class AuthApi extends AuthController{
         if($_GET){$data = $_GET['value'];
             if($data!=''){
                 $model = $model->where('school_name',$this->userInfo['school_name'])
-                    ->where('store_name','LIKE',"%$data%")->whereOr('keyword','LIKE',"%$data%");
-                if((int)$data) $model = $model->whereOr('id',$data);
+                    ->where('store_name','LIKE',"%$data%");
+//                if((int)$data) $model = $model->whereOr('id',$data);
             }
             $list = $model->field('id,store_name,cate_id,image,sales,price,stock')->select()->toArray();
             return JsonService::successful($list);

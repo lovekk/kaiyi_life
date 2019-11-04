@@ -62,19 +62,19 @@
     <!-- <block wx:for="{{menus}}" wx:key="key"> -->
       <view class='nav-item'>
         <navigator class='flex' hover-class="none" url='/pages/new-con/new-con?id=1'>
-          <image src='../../images/nav-02.png'></image>
+          <image src='../../images/111.png'></image>
           <view class='nav-title'>回收简介</view>
         </navigator>
       </view>
       <view class='nav-item'>
         <navigator class='flex' hover-class="none" url='/pages/price/price'>
-          <image src='../../images/nav-02.png'></image>
+          <image src='../../images/222.png'></image>
           <view class='nav-title'>回收价格</view>
         </navigator>
       </view>
       <view class='nav-item'>
         <navigator class='flex' hover-class="none" url='/pages/recycle/recycle'>
-          <image src='../../images/nav-02.png'></image>
+          <image src='../../images/333.png'></image>
           <view class='nav-title'>回收预约</view>
         </navigator>
       </view>
@@ -154,10 +154,11 @@
 </view>
 
 <!-- 生活服务 -->
-<view class="shenghuo">
-  <navigator class='flex' hover-class="none" url='/pages/recycle/recycle'>
+<view class="shenghuo" bind:tap="torday">
+<image class="bor" src='../../images/life2.png'></image>
+  <!-- <navigator class='flex' hover-class="none" url='/pages/productSort/productSort'>
     <image class="bor" src='../../images/life2.png'></image>
-  </navigator>
+  </navigator> -->
 </view>
 
 <!-- 促销单品 -->
