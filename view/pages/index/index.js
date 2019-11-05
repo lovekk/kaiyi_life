@@ -40,6 +40,11 @@ Page({
       url: '/pages/productSort/productSort'
     });
   },
+  tordaylive:function(e){
+    wx.switchTab({
+      url: '/pages/productSort/productSort?flag=' + 1
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -65,7 +70,7 @@ Page({
       header: header,
       success: function (res) {
         console.log(res);
-        if(res.data.msg == null){
+        if(res.data.msg == null ||res.data.msg == 'ok'){
           //关闭所有页面，打开到应用内的某个页面
           wx.reLaunch({
             url: '/pages/tab/tab'

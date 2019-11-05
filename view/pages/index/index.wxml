@@ -154,7 +154,7 @@
 </view>
 
 <!-- 生活服务 -->
-<view class="shenghuo" bind:tap="torday">
+<view class="shenghuo" bind:tap="tordaylive">
 <image class="bor" src='../../images/life2.png'></image>
   <!-- <navigator class='flex' hover-class="none" url='/pages/productSort/productSort'>
     <image class="bor" src='../../images/life2.png'></image>
